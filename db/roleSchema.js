@@ -21,13 +21,25 @@ var roleSchema = new mongoose.Schema({
     required: true,
     unique: true,
     minLength: 1,
-    maxLength: 20
+    maxLength: 20,
+    validate: {
+      validator: function(v) {
+        return /^[A-Za-z ]*$/.test(v);
+      },
+      message: "{PATH} can contain only alphabets and spaces"
+    }
   },
   description: {
     type: String,
     required: true,
     minLength: 0,
-    maxLength: 255
+    maxLength: 255,
+    validate: {
+      validator: function(v) {
+        return /^[A-Za-z ]*$/.test(v);
+      },
+      message: "{PATH} can contain only alphabets and spaces"
+    }
   },
   createdBy: {
     type: String
@@ -45,10 +57,24 @@ var roleSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 1,
-    maxLength: 15
+    maxLength: 15,
+    validate: {
+      validator: function(v) {
+        return /^[A-Za-z ]*$/.test(v);
+      },
+      message: "{PATH} can contain only alphabets and spaces"
+    }
   },
-  status: {
+  activationStatus: {
     type: String,
+    required: true
+  },
+  processingStatus: {
+    type: String,
+    required: true
+  },
+  associatedUsers: {
+    type: Number,
     required: true
   }
 });

@@ -6,48 +6,54 @@ module.exports.schema = {
   "title": "roleModel",
   "type": "object",
   "properties": {
-      "tenantId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 64
+    "tenantId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
     },
-      "applicationCode": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 15
+    "applicationCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 15
     },
-      "roleName": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 20
+    "roleName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20
     },
-      "description": {
-        "type": "string",
-        "minLength": 0,
-        "maxLength": 255
+    "description": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
     },
-      "createdBy": {
-        "type": "string"
+    "createdBy": {
+      "type": "string"
     },
-      "updatedBy": {
-        "type": ["string", "null"]
+    "updatedBy": {
+      "type": ["string", "null"]
     },
-      "createdDate": {
-        "type": "string",
-        "format": "date-time"
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
     },
-      "lastUpdatedDate": {
-        "type": ["string", "null"],
-        "format": "date-time"
+    "lastUpdatedDate": {
+      "type": ["string", "null"],
+      "format": "date-time"
     },
-      "roleType": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 15
+    "roleType": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 15
     },
-      "status": {
-        "type": "string"
+    "activationStatus": {
+      "type": "string"
+    },
+    "processingStatus": {
+      "type": "string"
+    },
+    "associatedUsers": {
+      "type": "number"
     }
   },
-  "required": ["tenantId","applicationCode","roleName","roleType","description","status"]
+  "required": ["tenantId", "applicationCode", "roleName", "roleType", "description", "activationStatus", "processingStatus", "associatedUsers"]
 };
