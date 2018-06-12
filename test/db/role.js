@@ -5,7 +5,7 @@ const chaiAsPromised = require("chai-as-promised");
 const expect = chai.expect;
 const role = require("../../db/role");
 
-var MONGO_DB_URL = process.env.MONGO_DB_URL || "mongodb://10.10.69.204/TestroleCollection";
+var MONGO_DB_URL = process.env.MONGO_DB_URL || "mongodb://10.10.69.204/TestPlatform_Dev";
 
 chai.use(chaiAsPromised);
 
@@ -380,6 +380,49 @@ describe("db role testing", () => {
       let res = role.findMany(`applicationCode`, `jhgvgfc`);
       expect(res)
         .to.eventually.to.eql([])
+        .notify(done);
+    });
+  });
+
+  describe('testing update role', () => {
+    //Delete all the recods from database
+    //add 2 roles
+    let id;
+    let update = {
+      applicationCode: "RTP",
+      roleName: "abc"
+    };
+    beforeEach((done) => {
+      role.deleteAll().then((res) => {
+        role.save(object1).then((res) => {
+          id = res._id;
+          role.save(object2).then((res) => {
+            done();
+          });
+        });
+      });
+    });
+
+    it('should update a role ', (done) => {
+      var res=role.update(id,update);
+      expect(res).to.eventually.be.a("object")
+      .to.have.property("roleName")
+      .to.eql(update.roleName)
+      .notify(done);
+    });
+
+    it("should be rejected when there is no role matching the parameter id", (done) => {
+      var res = role.update("5afe65875e5b3218cf267086", update);
+      expect(res).to.be.rejectedWith(`There is no such role with id:5afe65875e5b3218cf267086`)
+        .notify(done);
+    });
+
+    it("should be rejected for arbitrary object as Id parameter ", (done) => {
+      // an id is a 12 byte string, -1 is an invalid id value
+      let invalidId = "some value";
+      let res = role.update(invalidId, update);
+      expect(res)
+        .to.eventually.to.be.rejectedWith("must be a single String of 12 bytes")
         .notify(done);
     });
   });

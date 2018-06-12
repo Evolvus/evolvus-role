@@ -552,4 +552,99 @@ describe('role model validation', () => {
         }
       });
     });
+
+    describe("testing update Role", () => {
+      var id;
+      let object1 = {
+          //add one valid role object here
+        tenantId: "tid",
+        applicationCode: "CDA",
+        roleName: "technicalop",
+        roleType: "IT",
+        description: "technical-op role",
+        status: "active"
+        },
+        object2 = {
+          //add one more valid role object here
+          tenantId: "tid",
+          applicationCode: "RTP",
+          roleName: "technicalope",
+          roleType: "IT",
+          description: "technical-op1 role",
+          status: "active"
+        };
+      beforeEach((done) => {
+        db.deleteAll()
+          .then((res) => {
+            db.save(object1)
+              .then((res) => {
+                id = res._id;
+                db.save(object2)
+                  .then((res) => {
+                    done();
+                  });
+              });
+          });
+      });
+  
+      it('should update a role and have same _id', (done) => {
+        var res=role.update(id,{
+          roleName: "technicalop",
+          roleType: "IT"
+        });
+        expect(res)
+        .to.eventually.be.a("object")
+        .to.have.property("_id")
+        .to.eql(id)
+        .notify(done);
+      });
+
+      it('should update a role with new values', (done) => {
+        var res=role.update(id,{
+          roleName: "technicalop",
+          roleType: "IT"
+        });
+        expect(res)
+        .to.eventually.be.a("object")
+        .to.have.property("roleName")
+        .to.eql("technicalop")
+        .notify(done);
+      });
+  
+      it("should throw IllegalArgumentException for undefined Id parameter ", (done) => {
+        let undefinedId;
+        let res = role.update(undefinedId, {
+          roleName: "Admin"
+        });
+        expect(res)
+          .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+          .notify(done);
+      });
+  
+      it("should throw IllegalArgumentException for undefined update parameter ", (done) => {
+        let undefinedUpdate;
+        let res = role.update(id, undefinedUpdate);
+        expect(res)
+          .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+          .notify(done);
+      });
+  
+      it("should throw IllegalArgumentException for null Id parameter ", (done) => {
+        // an id is a 12 byte string, -1 is an invalid id value+
+        let res = role.update(null, {
+          roleName: "Admin"
+        });
+        expect(res)
+          .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+          .notify(done);
+      });
+  
+      it("should throw IllegalArgumentException for null update parameter ", (done) => {
+        // an id is a 12 byte string, -1 is an invalid id value+
+        let res = role.update(id, null);
+        expect(res)
+          .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+          .notify(done);
+      });
+    });
 });

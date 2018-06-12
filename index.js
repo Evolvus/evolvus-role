@@ -219,3 +219,31 @@ module.exports.getMany=(attribute,value)=> {
     }
   });
 };
+
+module.exports.update = (id, update) => {
+  return new Promise((resolve, reject) => {
+    try {
+      if ( id == null ||  update == null) {
+        throw new Error("IllegalArgumentException:id/update is null or undefined");
+      } 
+      docketObject.name="role_update";
+      docketObject.keyDataAsJSON=`roleObject ${id} to be updated with  ${update}`;
+      docketObject.details=`role update initiated`;
+      docketClient.postToDocket(docketObject);
+        roleCollection.update(id, update).then((resp) => {
+          debug("updated successfully",resp);
+          resolve(resp);
+        }).catch((error) => {
+          debug(`failed to update ${error}`);
+          reject(error);
+        });
+    } catch (e) {
+      docketObject.name="role_ExceptionOnUpdate";
+      docketObject.keyDataAsJSON=`roleObject ${id} to be updated with  ${update}`;
+      docketObject.details=`caught Exception on role_update ${e.message}`;
+      docketClient.postToDocket(docketObject);
+      debug(`caught exception ${e}`);
+      reject(e);
+    }
+  });
+};
