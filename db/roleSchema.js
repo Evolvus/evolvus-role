@@ -42,16 +42,19 @@ var roleSchema = new mongoose.Schema({
     }
   },
   createdBy: {
-    type: String
+    type: String,
+    required: true
   },
   updatedBy: {
     type: [String, null]
   },
   createdDate: {
-    type: Date
+    type: Date,
+    required: true
   },
   lastUpdatedDate: {
-    type: Date
+    type: Date,
+    required: true
   },
   roleType: {
     type: String,

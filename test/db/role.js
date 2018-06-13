@@ -33,7 +33,10 @@
      description: "role",
      activationStatus: "active",
      processingStatus: "unauthorized",
-     associatedUsers: 5
+     associatedUsers: 5,
+     createdBy: "kamalarani",
+     createdDate: new Date(),
+     lastUpdatedDate: new Date()
    };
    let object2 = {
      // add a valid role object
@@ -44,7 +47,10 @@
      description: "role",
      activationStatus: "inactive",
      processingStatus: "rejected",
-     associatedUsers: 5
+     associatedUsers: 5,
+     createdBy: "kamalarani",
+     createdDate: new Date(),
+     lastUpdatedDate: new Date()
    };
 
    describe("testing role.save", () => {
@@ -69,7 +75,10 @@
          description: "role",
          activationStatus: "active",
          processingStatus: "unauthorized",
-         associatedUsers: 5
+         associatedUsers: 5,
+         createdBy: "kamalarani",
+         createdDate: new Date(),
+         lastUpdatedDate: new Date()
        };
        let res = role.save(testroleCollection);
        expect(res)
@@ -90,7 +99,10 @@
          description: "role",
          activationStatus: "active",
          processingStatus: "unauthorized",
-         associatedUsers: 5
+         associatedUsers: 5,
+         createdBy: "kamalarani",
+         createdDate: new Date(),
+         lastUpdatedDate: new Date()
        };
        let res = role.save(invalidObject);
        expect(res)
@@ -111,7 +123,9 @@
        activationStatus: "active",
        createdDate: new Date(),
        processingStatus: "rejected",
-       associatedUsers: 5
+       associatedUsers: 5,
+       createdBy: "kamalarani",
+       lastUpdatedDate: new Date()
      };
      let object2 = {
        // add a valid role object
@@ -123,7 +137,9 @@
        activationStatus: "inactive",
        createdDate: new Date(),
        processingStatus: "unauthorized",
-       associatedUsers: 5
+       associatedUsers: 5,
+       createdBy: "kamalarani",
+       lastUpdatedDate: new Date()
      };
      let object3 = {
        // add a valid role object
@@ -133,9 +149,11 @@
        roleType: "IT",
        description: "role",
        activationStatus: "active",
-       createdDate: new Date(),
        processingStatus: "unauthorized",
-       associatedUsers: 4
+       associatedUsers: 4,
+       createdBy: "kamalarani",
+       createdDate: new Date(),
+       lastUpdatedDate: new Date()
      };
      let object4 = {
        // add a valid role object
@@ -147,7 +165,9 @@
        activationStatus: "active",
        createdDate: new Date(),
        processingStatus: "rejected",
-       associatedUsers: 3
+       associatedUsers: 3,
+       createdBy: "kamalarani",
+       lastUpdatedDate: new Date()
      };
      // 1. Delete all records in the table and insert
      //    4 new records.
@@ -257,7 +277,10 @@
        description: "role",
        activationStatus: "active",
        processingStatus: "unauthorized",
-       associatedUsers: 3
+       associatedUsers: 3,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      var id;
      beforeEach((done) => {
@@ -274,8 +297,7 @@
      it("should return role identified by Id ", (done) => {
        let res = role.findById(id);
        expect(res)
-         .to.eventually.include(testObject)
-         .to.have.property('applicationCode')
+         .to.eventually.have.property('applicationCode')
          .to.eql('CDA')
          .notify(done);
      });
@@ -299,7 +321,10 @@
        description: "role",
        activationStatus: "active",
        processingStatus: "rejected",
-       associatedUsers: 2
+       associatedUsers: 2,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      let object2 = {
        // add a valid role object
@@ -310,7 +335,10 @@
        description: "role",
        activationStatus: "active",
        processingStatus: "rejected",
-       associatedUsers: 2
+       associatedUsers: 2,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      // Delete all records, insert two record
      // 1. Query by one attribute and it should return one role
@@ -336,8 +364,7 @@
        let attributeValue = "operation first";
        let res = role.findOne(attributename, attributeValue);
        expect(res)
-         .to.eventually.include(object2)
-         .to.have.property('applicationCode')
+         .to.eventually.have.property('applicationCode')
          .to.eql('RTP')
          .notify(done);
      });
@@ -363,7 +390,10 @@
        description: "role",
        activationStatus: "active",
        processingStatus: "unauthorized",
-       associatedUsers: 2
+       associatedUsers: 2,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      let role2 = {
        //add valid object with one attribute value same as "role1"
@@ -374,7 +404,10 @@
        description: "role",
        activationStatus: "active",
        processingStatus: "rejected",
-       associatedUsers: 1
+       associatedUsers: 1,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      // delete all records and insert two roles
      beforeEach((done) => {

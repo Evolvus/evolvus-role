@@ -27,7 +27,10 @@
       description: "role",
       activationStatus: "active",
       processingStatus: "unauthorized",
-      associatedUsers: 5
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString(),
+      lastUpdatedDate: new Date().toISOString()
     };
 
     let invalidObject = {
@@ -39,7 +42,10 @@
       description: "role",
       activationStatus: "active",
       processingStatus: "unauthorized",
-      associatedUsers: 6
+      associatedUsers: 6,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString(),
+      lastUpdatedDate: new Date().toISOString()
     };
 
     let undefinedObject; // object that is not defined
@@ -148,7 +154,10 @@
           description: "role",
           activationStatus: "active",
           processingStatus: "rejected",
-          associatedUsers: 2
+          associatedUsers: 2,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         },
         object2 = {
           //add one more valid role object here
@@ -159,7 +168,10 @@
           description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 2
+          associatedUsers: 2,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         },
         object3 = {
           tenantId: "tid",
@@ -169,7 +181,10 @@
           description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 5
+          associatedUsers: 5,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -367,7 +382,10 @@
           description: "role",
           activationStatus: "active",
           processingStatus: "rejected",
-          associatedUsers: 2
+          associatedUsers: 2,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         },
         object2 = {
           //add one more valid role object here
@@ -378,7 +396,10 @@
           description: "role",
           activationStatus: "active",
           processingStatus: "rejected",
-          associatedUsers: 3
+          associatedUsers: 3,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -477,7 +498,10 @@
           description: "technical op role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 5
+          associatedUsers: 5,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         },
         object2 = {
           //add one more valid role object here
@@ -488,7 +512,10 @@
           description: "technical operation role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 5
+          associatedUsers: 5,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -586,7 +613,10 @@
           description: "technical op role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 5
+          associatedUsers: 5,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         },
         object2 = {
           //add one more valid role object here
@@ -597,7 +627,10 @@
           description: "technical op role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 5
+          associatedUsers: 5,
+          createdBy: "kamalarani",
+          createdDate: new Date(),
+          lastUpdatedDate: new Date()
         };
       beforeEach((done) => {
         db.deleteAll()

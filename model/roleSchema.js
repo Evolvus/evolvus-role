@@ -55,5 +55,5 @@ module.exports.schema = {
       "type": "number"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "roleType", "description", "activationStatus", "processingStatus", "associatedUsers"]
+  "required": ["tenantId", "applicationCode", "roleName", "roleType", "description", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate"]
 };
