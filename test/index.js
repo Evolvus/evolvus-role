@@ -156,8 +156,8 @@
           processingStatus: "rejected",
           associatedUsers: 2,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         },
         object2 = {
           //add one more valid role object here
@@ -170,8 +170,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 2,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         },
         object3 = {
           tenantId: "tid",
@@ -183,8 +183,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 5,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -384,8 +384,8 @@
           processingStatus: "rejected",
           associatedUsers: 2,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         },
         object2 = {
           //add one more valid role object here
@@ -398,8 +398,8 @@
           processingStatus: "rejected",
           associatedUsers: 3,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -500,8 +500,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 5,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         },
         object2 = {
           //add one more valid role object here
@@ -514,8 +514,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 5,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         };
       beforeEach((done) => {
         db.deleteAll().then((res) => {
@@ -615,8 +615,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 5,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         },
         object2 = {
           //add one more valid role object here
@@ -629,8 +629,8 @@
           processingStatus: "unauthorized",
           associatedUsers: 5,
           createdBy: "kamalarani",
-          createdDate: new Date(),
-          lastUpdatedDate: new Date()
+          createdDate: new Date().toISOString(),
+          lastUpdatedDate: new Date().toISOString()
         };
       beforeEach((done) => {
         db.deleteAll()

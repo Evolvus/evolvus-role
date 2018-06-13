@@ -13,8 +13,8 @@ var roleSchema = new mongoose.Schema({
   applicationCode: {
     type: String,
     required: true,
-    minLength: 1,
-    maxLength: 15
+    minLength: 3,
+    maxLength: 20
   },
   roleName: {
     type: String,

@@ -5,7 +5,7 @@
  const expect = chai.expect;
  const role = require("../../db/role");
 
- var MONGO_DB_URL = process.env.MONGO_DB_URL || "mongodb://10.10.69.204/TestPlatform_Dev";
+ var MONGO_DB_URL = process.env.MONGO_DB_URL || "mongodb://10.10.69.204/Platform_Dev";
 
  chai.use(chaiAsPromised);
 
@@ -35,8 +35,8 @@
      processingStatus: "unauthorized",
      associatedUsers: 5,
      createdBy: "kamalarani",
-     createdDate: new Date(),
-     lastUpdatedDate: new Date()
+     createdDate: new Date().toISOString(),
+     lastUpdatedDate: new Date().toISOString()
    };
    let object2 = {
      // add a valid role object
@@ -49,8 +49,8 @@
      processingStatus: "rejected",
      associatedUsers: 5,
      createdBy: "kamalarani",
-     createdDate: new Date(),
-     lastUpdatedDate: new Date()
+     createdDate: new Date().toISOString(),
+     lastUpdatedDate: new Date().toISOString()
    };
 
    describe("testing role.save", () => {
@@ -77,13 +77,12 @@
          processingStatus: "unauthorized",
          associatedUsers: 5,
          createdBy: "kamalarani",
-         createdDate: new Date(),
-         lastUpdatedDate: new Date()
+         createdDate: new Date().toISOString(),
+         lastUpdatedDate: new Date().toISOString()
        };
        let res = role.save(testroleCollection);
        expect(res)
-         .to.eventually.include(testroleCollection)
-         .to.have.property('applicationCode')
+         .to.eventually.have.property('applicationCode')
          .to.eql('CDA')
          .notify(done);
      });
@@ -101,8 +100,8 @@
          processingStatus: "unauthorized",
          associatedUsers: 5,
          createdBy: "kamalarani",
-         createdDate: new Date(),
-         lastUpdatedDate: new Date()
+         createdDate: new Date().toISOString(),
+         lastUpdatedDate: new Date().toISOString()
        };
        let res = role.save(invalidObject);
        expect(res)
@@ -121,11 +120,11 @@
        roleType: "IT",
        description: "role",
        activationStatus: "active",
-       createdDate: new Date(),
+       createdDate: new Date().toISOString(),
        processingStatus: "rejected",
        associatedUsers: 5,
        createdBy: "kamalarani",
-       lastUpdatedDate: new Date()
+       lastUpdatedDate: new Date().toISOString()
      };
      let object2 = {
        // add a valid role object
@@ -135,11 +134,11 @@
        roleType: "IT",
        description: "role",
        activationStatus: "inactive",
-       createdDate: new Date(),
+       createdDate: new Date().toISOString(),
        processingStatus: "unauthorized",
        associatedUsers: 5,
        createdBy: "kamalarani",
-       lastUpdatedDate: new Date()
+       lastUpdatedDate: new Date().toISOString()
      };
      let object3 = {
        // add a valid role object
@@ -152,8 +151,8 @@
        processingStatus: "unauthorized",
        associatedUsers: 4,
        createdBy: "kamalarani",
-       createdDate: new Date(),
-       lastUpdatedDate: new Date()
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
      };
      let object4 = {
        // add a valid role object
@@ -163,11 +162,11 @@
        roleType: "IT",
        description: "role",
        activationStatus: "active",
-       createdDate: new Date(),
+       createdDate: new Date().toISOString(),
        processingStatus: "rejected",
        associatedUsers: 3,
        createdBy: "kamalarani",
-       lastUpdatedDate: new Date()
+       lastUpdatedDate: new Date().toISOString()
      };
      // 1. Delete all records in the table and insert
      //    4 new records.

@@ -13,8 +13,8 @@ module.exports.schema = {
     },
     "applicationCode": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 15
+      "minLength": 3,
+      "maxLength": 20
     },
     "roleName": {
       "type": "string",
