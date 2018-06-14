@@ -59,16 +59,17 @@
        }
 
        // Other validations here
-
-
+       else {
+         roleCollection.save(roleObject).then((result) => {
+           debug(`saved successfully ${result}`);
+           resolve(result);
+         }).catch((e) => {
+           debug(`failed to save with an error: ${e}`);
+           reject(e);
+         });
+       }
        // if the object is valid, save the object to the database
-       roleCollection.save(roleObject).then((result) => {
-         debug(`saved successfully ${result}`);
-         resolve(result);
-       }).catch((e) => {
-         debug(`failed to save with an error: ${e}`);
-         reject(e);
-       });
+
      } catch (e) {
        docketObject.name = "role_ExceptionOnSave";
        docketObject.keyDataAsJSON = JSON.stringify(roleObject);
