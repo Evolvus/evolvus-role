@@ -46,10 +46,12 @@ module.exports.schema = {
       "maxLength": 15
     },
     "activationStatus": {
-      "type": "string"
+      "type": "string",
+      "enum": ["active", "inactive"]
     },
     "processingStatus": {
-      "type": "string"
+      "type": "string",
+      "enum": ["authorized", "unauthorized", "rejected"]
     },
     "associatedUsers": {
       "type": "number"
