@@ -22,11 +22,27 @@
       // add a valid role Object here
       tenantId: "tid",
       applicationCode: "CDA",
-      roleName: "ooperations",
-      roleType: "IT",
+      roleName: "adminOne",
+      menuGroup: [{
+        tenantId: "tid",
+        applicationCode: "CDA",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
+          applicationCode: "CDA",
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
       description: "role",
       activationStatus: "active",
-      processingStatus: "rejected",
+      processingStatus: "unauthorized",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -36,13 +52,29 @@
     let invalidObject = {
       //add invalid role Object here
       tenantId: "tid",
-      applicationCode: "CDA",
-      roleName: 456,
-      roleType: "IT",
+      applicationCode: 457,
+      roleName: 457,
+      menuGroup: [{
+        tenantId: "tid",
+        applicationCode: "CDA",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
+          applicationCode: "CDA",
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
       description: "role",
-      activationStatus: "inactive",
-      processingStatus: "authorized",
-      associatedUsers: 6,
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
       lastUpdatedDate: new Date().toISOString()
@@ -149,12 +181,28 @@
           //add one valid role object here
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "adminn",
-          roleType: "IT",
+          roleName: "adminOne",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "micc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmic",
+              title: "menuItem title"
+            }]
+          }],
           description: "role",
           activationStatus: "active",
-          processingStatus: "rejected",
-          associatedUsers: 2,
+          processingStatus: "unauthorized",
+          associatedUsers: 5,
           createdBy: "kamalarani",
           createdDate: new Date().toISOString(),
           lastUpdatedDate: new Date().toISOString()
@@ -162,13 +210,29 @@
         object2 = {
           //add one more valid role object here
           tenantId: "tid",
-          applicationCode: "RTP",
-          roleName: "RTP admin second",
-          roleType: "IT",
+          applicationCode: "CDA",
+          roleName: "adminTwo",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mrgcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "mircc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmric",
+              title: "menuItem title"
+            }]
+          }],
           description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
-          associatedUsers: 2,
+          associatedUsers: 5,
           createdBy: "kamalarani",
           createdDate: new Date().toISOString(),
           lastUpdatedDate: new Date().toISOString()
@@ -176,8 +240,24 @@
         object3 = {
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "CDA OP",
-          roleType: "IT",
+          roleName: "adminThree",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgctc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "mictc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmitc",
+              title: "menuItem title"
+            }]
+          }],
           description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
@@ -377,12 +457,28 @@
           //add one valid role object here
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "CDA OPERATION",
-          roleType: "IT",
+          roleName: "adminOne",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "micc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmic",
+              title: "menuItem title"
+            }]
+          }],
           description: "role",
           activationStatus: "active",
-          processingStatus: "rejected",
-          associatedUsers: 2,
+          processingStatus: "unauthorized",
+          associatedUsers: 5,
           createdBy: "kamalarani",
           createdDate: new Date().toISOString(),
           lastUpdatedDate: new Date().toISOString()
@@ -390,13 +486,29 @@
         object2 = {
           //add one more valid role object here
           tenantId: "tid",
-          applicationCode: "RTP",
-          roleName: "RTP OPERATION",
-          roleType: "IT",
+          applicationCode: "CDA",
+          roleName: "adminTwo",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgcfc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "mficc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmfic",
+              title: "menuItem title"
+            }]
+          }],
           description: "role",
           activationStatus: "active",
-          processingStatus: "rejected",
-          associatedUsers: 3,
+          processingStatus: "unauthorized",
+          associatedUsers: 5,
           createdBy: "kamalarani",
           createdDate: new Date().toISOString(),
           lastUpdatedDate: new Date().toISOString()
@@ -414,11 +526,11 @@
       it("should return one role record identified by attribute", (done) => {
         try {
           // take one attribute from object1 or object2 and its value
-          let res = role.getOne(`applicationCode`, `RTP`);
+          let res = role.getOne(`applicationCode`, `CDA`);
           expect(res)
             .to.eventually.be.a("object")
             .to.have.property(`applicationCode`)
-            .to.eql(`RTP`)
+            .to.eql(`CDA`)
             .notify(done);
         } catch (e) {
           expect.fail(e, null, `exception: ${e}`);
@@ -493,9 +605,25 @@
           //add one valid role object here
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "technical op",
-          roleType: "IT",
-          description: "technical op role",
+          roleName: "adminOne",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "micc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmic",
+              title: "menuItem title"
+            }]
+          }],
+          description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
           associatedUsers: 5,
@@ -507,9 +635,25 @@
           //add one more valid role object here
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "technical operation",
-          roleType: "IT",
-          description: "technical operation role",
+          roleName: "adminTwo",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgscc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "miscc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmisc",
+              title: "menuItem title"
+            }]
+          }],
+          description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
           associatedUsers: 5,
@@ -608,9 +752,25 @@
           //add one valid role object here
           tenantId: "tid",
           applicationCode: "CDA",
-          roleName: "technicalop",
-          roleType: "IT",
-          description: "technical op role",
+          roleName: "adminOne",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "micc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmic",
+              title: "menuItem title"
+            }]
+          }],
+          description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
           associatedUsers: 5,
@@ -621,10 +781,26 @@
         object2 = {
           //add one more valid role object here
           tenantId: "tid",
-          applicationCode: "RTP",
-          roleName: "technicalope",
-          roleType: "IT",
-          description: "technical op role",
+          applicationCode: "CDA",
+          roleName: "adminTwo",
+          menuGroup: [{
+            tenantId: "tid",
+            applicationCode: "CDA",
+            menuGroupCode: "mgjcc",
+            title: "menugroup title",
+            menuItems: [{
+              menuItemType: "queues",
+              applicationCode: "CDA",
+              menuItemCode: "micjc",
+              title: "menuItem title"
+            }, {
+              menuItemType: "queues",
+              applicationCode: "RTP",
+              menuItemCode: "mmijc",
+              title: "menuItem title"
+            }]
+          }],
+          description: "role",
           activationStatus: "active",
           processingStatus: "unauthorized",
           associatedUsers: 5,
@@ -648,7 +824,7 @@
 
       it('should update a role and have same _id', (done) => {
         var res = role.update(id, {
-          roleName: "technicalop",
+          roleName: "adminOne",
           roleType: "IT"
         });
         expect(res)
