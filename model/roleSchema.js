@@ -21,6 +21,56 @@ module.exports.schema = {
       "minLength": 1,
       "maxLength": 20
     },
+    "menuGroup": {
+      "type": "array",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "applicationCode": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 20
+        },
+        "menuGroupCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "menuItems": {
+          "type": "array",
+          "properties": {
+            "menuItemType": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "applicationCode": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 20
+            },
+            "menuItemCode": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            }
+          }
+        }
+      }
+    },
     "description": {
       "type": "string",
       "minLength": 0,
@@ -37,13 +87,16 @@ module.exports.schema = {
       "format": "date-time"
     },
     "lastUpdatedDate": {
-      "type": ["string", "null"],
+      "type": "string",
       "format": "date-time"
     },
-    "roleType": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 15
+    "enableFlag": {
+      "type": "number",
+      "default": 1
+    },
+    "deletedFlag": {
+      "type": "number",
+      "default": 0
     },
     "activationStatus": {
       "type": "string",
@@ -57,5 +110,5 @@ module.exports.schema = {
       "type": "number"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "roleType", "description", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate"]
+  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate"]
 };

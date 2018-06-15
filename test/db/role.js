@@ -29,7 +29,23 @@
      tenantId: "tid",
      applicationCode: "CDA",
      roleName: "admin",
-     roleType: "IT",
+     menuGroup: [{
+       tenantId: "tid",
+       applicationCode: "CDA",
+       menuGroupCode: "mgc",
+       title: "menugroup title",
+       menuItems: [{
+         menuItemType: "queues",
+         applicationCode: "CDA",
+         menuItemCode: "mic",
+         title: "menuItem title"
+       }, {
+         menuItemType: "queues",
+         applicationCode: "RTP",
+         menuItemCode: "mic",
+         title: "menuItem title"
+       }]
+     }],
      description: "role",
      activationStatus: "active",
      processingStatus: "unauthorized",
@@ -42,11 +58,27 @@
      // add a valid role object
      tenantId: "tid",
      applicationCode: "CDA",
-     roleName: "operation",
-     roleType: "IT",
+     roleName: "adminTwo",
+     menuGroup: [{
+       tenantId: "tid",
+       applicationCode: "CDA",
+       menuGroupCode: "mgcc",
+       title: "menugroup title",
+       menuItems: [{
+         menuItemType: "queues",
+         applicationCode: "CDA",
+         menuItemCode: "mijc",
+         title: "menuItem title"
+       }, {
+         menuItemType: "queues",
+         applicationCode: "RTP",
+         menuItemCode: "micl",
+         title: "menuItem title"
+       }]
+     }],
      description: "role",
-     activationStatus: "inactive",
-     processingStatus: "rejected",
+     activationStatus: "active",
+     processingStatus: "unauthorized",
      associatedUsers: 5,
      createdBy: "kamalarani",
      createdDate: new Date().toISOString(),
@@ -70,8 +102,54 @@
          // add a valid role object
          tenantId: "tid",
          applicationCode: "CDA",
-         roleName: "RTP operation",
-         roleType: "IT",
+         roleName: "admin",
+         menuGroup: [{
+           tenantId: "tid",
+           applicationCode: "CDA",
+           menuGroupCode: "mgc",
+           title: "menugroup title",
+           menuItems: [{
+             menuItemType: "queues",
+             applicationCode: "CDA",
+             menuItemCode: "mic",
+             title: "menuItem title"
+           }, {
+             menuItemType: "queues",
+             applicationCode: "RTP",
+             menuItemCode: "miic",
+             title: "menuItem title"
+           }]
+         }],
+         description: "role",
+         activationStatus: "active",
+         processingStatus: "unauthorized",
+         associatedUsers: 5,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
+         lastUpdatedDate: new Date().toISOString()
+       };
+       let object2 = {
+         // add a valid role object
+         tenantId: "tid",
+         applicationCode: "CDA",
+         roleName: "adminOne",
+         menuGroup: [{
+           tenantId: "tid",
+           applicationCode: "CDA",
+           menuGroupCode: "mgcc",
+           title: "menugroup title",
+           menuItems: [{
+             menuItemType: "queues",
+             applicationCode: "CDA",
+             menuItemCode: "micc",
+             title: "menuItem title"
+           }, {
+             menuItemType: "queues",
+             applicationCode: "RTP",
+             menuItemCode: "mmic",
+             title: "menuItem title"
+           }]
+         }],
          description: "role",
          activationStatus: "active",
          processingStatus: "unauthorized",
@@ -93,8 +171,25 @@
        let invalidObject = {
          // add a invalid role object
          tenantId: "tid",
-         roleName: 234,
-         roleType: 764,
+         applicationCode: 345,
+         roleName: 4576,
+         menuGroup: [{
+           tenantId: "tid",
+           applicationCode: "CDA",
+           menuGroupCode: "mgcc",
+           title: "menugroup title",
+           menuItems: [{
+             menuItemType: "queues",
+             applicationCode: "CDA",
+             menuItemCode: "micc",
+             title: "menuItem title"
+           }, {
+             menuItemType: "queues",
+             applicationCode: "RTP",
+             menuItemCode: "mmic",
+             title: "menuItem title"
+           }]
+         }],
          description: "role",
          activationStatus: "active",
          processingStatus: "unauthorized",
@@ -116,40 +211,88 @@
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "admin CDA",
-       roleType: "IT",
+       roleName: "adminOne",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
-       createdDate: new Date().toISOString(),
-       processingStatus: "rejected",
+       processingStatus: "unauthorized",
        associatedUsers: 5,
        createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
      };
      let object2 = {
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "operation CDA",
-       roleType: "IT",
+       roleName: "adminTwo",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgocc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "miocc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmoic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
-       activationStatus: "inactive",
-       createdDate: new Date().toISOString(),
+       activationStatus: "active",
        processingStatus: "unauthorized",
        associatedUsers: 5,
        createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
      };
      let object3 = {
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "CDA operation",
-       roleType: "IT",
+       roleName: "adminThree",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mggcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "miicc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmiic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
        processingStatus: "unauthorized",
-       associatedUsers: 4,
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -158,14 +301,30 @@
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "CDA ope",
-       roleType: "IT",
+       roleName: "adminFour",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgccc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
-       createdDate: new Date().toISOString(),
-       processingStatus: "rejected",
-       associatedUsers: 3,
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
        createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
      };
      // 1. Delete all records in the table and insert
@@ -271,12 +430,28 @@
        //add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "CDA operations",
-       roleType: "IT",
+       roleName: "adminOne",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "mmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
        processingStatus: "unauthorized",
-       associatedUsers: 3,
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -315,12 +490,28 @@
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "admin first",
-       roleType: "IT",
+       roleName: "adminOne",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
-       processingStatus: "rejected",
-       associatedUsers: 2,
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -328,13 +519,29 @@
      let object2 = {
        // add a valid role object
        tenantId: "tid",
-       applicationCode: "RTP",
-       roleName: "operation first",
-       roleType: "IT",
+       applicationCode: "CDA",
+       roleName: "adminTwo",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgocc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "miocc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmoic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
-       processingStatus: "rejected",
-       associatedUsers: 2,
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -360,11 +567,11 @@
      it("should return object for valid attribute value", (done) => {
        // take one valid attribute and its value
        let attributename = "roleName";
-       let attributeValue = "operation first";
+       let attributeValue = "adminOne";
        let res = role.findOne(attributename, attributeValue);
        expect(res)
          .to.eventually.have.property('applicationCode')
-         .to.eql('RTP')
+         .to.eql('CDA')
          .notify(done);
      });
 
@@ -383,13 +590,29 @@
      let role1 = {
        //add valid object
        tenantId: "tid",
-       applicationCode: "RTP",
-       roleName: "RTP op",
-       roleType: "IT",
+       applicationCode: "CDA",
+       roleName: "adminOne",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
        processingStatus: "unauthorized",
-       associatedUsers: 2,
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -397,13 +620,29 @@
      let role2 = {
        //add valid object with one attribute value same as "role1"
        tenantId: "tid",
-       applicationCode: "RTP",
-       roleName: "RTP op first",
-       roleType: "IT",
+       applicationCode: "CDA",
+       roleName: "adminTwo",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mqgcc",
+         title: "menugroup title",
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "mqicc",
+           title: "menuItem title"
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mqmic",
+           title: "menuItem title"
+         }]
+       }],
        description: "role",
        activationStatus: "active",
-       processingStatus: "rejected",
-       associatedUsers: 1,
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
        createdBy: "kamalarani",
        createdDate: new Date().toISOString(),
        lastUpdatedDate: new Date().toISOString()
@@ -425,7 +664,7 @@
      it("should return array of objects for valid attribute value", (done) => {
        // take one valid attribute and its value
        let attributename = "applicationCode";
-       let attributeValue = "RTP";
+       let attributeValue = "CDA";
        let res = role.findMany(attributename, attributeValue);
        expect(res)
          .to.eventually.be.a("array")
@@ -447,7 +686,7 @@
      //add 2 roles
      let id;
      let update = {
-       applicationCode: "RTP",
+       applicationCode: "CDA",
        roleName: "abc"
      };
      beforeEach((done) => {
