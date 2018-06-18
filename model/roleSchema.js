@@ -80,7 +80,7 @@ module.exports.schema = {
       "type": "string"
     },
     "updatedBy": {
-      "type": ["string", "null"]
+      "type": "string"
     },
     "createdDate": {
       "type": "string",
@@ -110,5 +110,5 @@ module.exports.schema = {
       "type": "number"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate"]
+  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate"]
 };

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { menu } = require("evolvus-menu");
 
+var Menu = mongoose.model("menuCollection", menu.menuDBschema);
 
 var roleSchema = new mongoose.Schema({
   // Add all attributes below tenantId
@@ -23,7 +25,7 @@ var roleSchema = new mongoose.Schema({
     minLength: 1,
     maxLength: 20,
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^[A-Za-z ]*$/.test(v);
       },
       message: "{PATH} can contain only alphabets and spaces"
@@ -31,69 +33,8 @@ var roleSchema = new mongoose.Schema({
   },
   menuGroup: {
     type: Array,
-    properties: {
-      tenantId: {
-        type: String,
-        minLength: 1,
-        maxLength: 64
-      },
-      applicationCode: {
-        type: String,
-        minLength: 3,
-        maxLength: 20
-      },
-      menuGroupCode: {
-        type: String,
-        minLength: 1,
-        maxLength: 20,
-        unique: true,
-        required: true,
-        validate: {
-          validator: function(v) {
-            return /^[A-Za-z ]*$/.test(v);
-          },
-          message: "{PATH} can contain only alphabets and spaces"
-        }
-      },
-      title: {
-        type: String,
-        minLength: 1,
-        maxLength: 20
-      },
-      menuItems: {
-        type: Array,
-        properties: {
-          menuItemType: {
-            type: String,
-            minLength: 1,
-            maxLength: 20
-          },
-          applicationCode: {
-            type: String,
-            minLength: 3,
-            maxLength: 20
-          },
-          menuItemCode: {
-            type: String,
-            minLength: 1,
-            maxLength: 20,
-            unique: true,
-            required: true,
-            validate: {
-              validator: function(v) {
-                return /^[A-Za-z ]*$/.test(v);
-              },
-              message: "{PATH} can contain only alphabets and spaces"
-            }
-          },
-          title: {
-            type: String,
-            minLength: 1,
-            maxLength: 20
-          }
-        }
-      }
-    }
+    ref: 'Menu',
+    required:true
   },
   description: {
     type: String,
@@ -101,7 +42,7 @@ var roleSchema = new mongoose.Schema({
     minLength: 0,
     maxLength: 255,
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /^[A-Za-z ]*$/.test(v);
       },
       message: "{PATH} can contain only alphabets and spaces"
@@ -112,15 +53,14 @@ var roleSchema = new mongoose.Schema({
     required: true
   },
   updatedBy: {
-    type: [String, null]
+    type: String
   },
   createdDate: {
     type: Date,
     required: true
   },
   lastUpdatedDate: {
-    type: Date,
-    required: true
+    type: Date
   },
   enableFlag: {
     type: Number,
