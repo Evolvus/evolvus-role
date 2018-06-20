@@ -44,6 +44,9 @@ module.exports.schema = {
           "minLength": 1,
           "maxLength": 20
         },
+        "selectedFlag":{
+          "type":"boolean"
+        },
         "menuItems": {
           "type": "array",
           "properties": {
@@ -66,6 +69,9 @@ module.exports.schema = {
               "type": "string",
               "minLength": 1,
               "maxLength": 20
+            },
+            "selectedFlag":{
+              "type":"boolean"
             }
           }
         }
