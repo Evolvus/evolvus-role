@@ -22,22 +22,27 @@ describe('role model validation', () => {
     // add a valid role Object here
     tenantId: "tid",
     applicationCode: "CDA",
-    roleName: "adminOne",
+    roleName: "admin",
     menuGroup: [{
       tenantId: "tid",
       applicationCode: "CDA",
-      menuGroupCode: "mgcc",
+      menuGroupCode: "mgc",
       title: "menugroup title",
+      menuGroupOrder: 1,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString(),
       menuItems: [{
         menuItemType: "queues",
         applicationCode: "CDA",
         menuItemCode: "micc",
-        title: "menuItem title"
+        title: "menuItem title",
+        menuItemOrder: 1
       }, {
         menuItemType: "queues",
         applicationCode: "RTP",
         menuItemCode: "mmic",
-        title: "menuItem title"
+        title: "menuItem title",
+        menuItemOrder: 1
       }]
     }],
     description: "role",
@@ -45,7 +50,8 @@ describe('role model validation', () => {
     processingStatus: "unauthorized",
     associatedUsers: 5,
     createdBy: "kamalarani",
-    createdDate: new Date().toISOString()
+    createdDate: new Date().toISOString(),
+    lastUpdatedDate: new Date().toISOString()
   };
 
   let invalidObject = {
@@ -117,26 +123,26 @@ describe('role model validation', () => {
     });
 
     if ("should error out for undefined objects", (done) => {
-      try {
-        var res = role.validate(undefinedObject);
-        expect(res)
-          .to.be.rejected
-          .notify(done);
-      } catch (e) {
-        expect.fail(e, null, `exception: ${e}`);
-      }
-    });
+        try {
+          var res = role.validate(undefinedObject);
+          expect(res)
+            .to.be.rejected
+            .notify(done);
+        } catch (e) {
+          expect.fail(e, null, `exception: ${e}`);
+        }
+      });
 
     if ("should error out for null objects", (done) => {
-      try {
-        var res = role.validate(nullObject);
-        expect(res)
-          .to.be.rejected
-          .notify(done);
-      } catch (e) {
-        expect.fail(e, null, `exception: ${e}`);
-      }
-    });
+        try {
+          var res = role.validate(nullObject);
+          expect(res)
+            .to.be.rejected
+            .notify(done);
+        } catch (e) {
+          expect.fail(e, null, `exception: ${e}`);
+        }
+      });
 
   });
 
@@ -176,34 +182,34 @@ describe('role model validation', () => {
 
   describe('testing role.getAll when there is data in database', () => {
     let object1 = {
-      //add one valid role object here
-      tenantId: "tid",
-      applicationCode: "CDA",
-      roleName: "adminOne",
-      menuGroup: [{
+        //add one valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        menuGroupCode: "mgcc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
+        roleName: "adminOne",
+        menuGroup: [{
+          tenantId: "tid",
           applicationCode: "CDA",
-          menuItemCode: "micc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "active",
-      processingStatus: "unauthorized",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString()
-    },
+          menuGroupCode: "mgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "micc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmic",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "active",
+        processingStatus: "unauthorized",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString()
+      },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
@@ -449,34 +455,34 @@ describe('role model validation', () => {
 
   describe("testing role.getOne", () => {
     let object1 = {
-      //add one valid role object here
-      tenantId: "tid",
-      applicationCode: "CDA",
-      roleName: "adminOne",
-      menuGroup: [{
+        //add one valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        menuGroupCode: "mgcc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
+        roleName: "adminOne",
+        menuGroup: [{
+          tenantId: "tid",
           applicationCode: "CDA",
-          menuItemCode: "micc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "active",
-      processingStatus: "unauthorized",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString()
-    },
+          menuGroupCode: "mgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "micc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmic",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "active",
+        processingStatus: "unauthorized",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString()
+      },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
@@ -595,34 +601,34 @@ describe('role model validation', () => {
 
   describe("testing role.getMany", () => {
     let object1 = {
-      //add one valid role object here
-      tenantId: "tid",
-      applicationCode: "CDA",
-      roleName: "adminOne",
-      menuGroup: [{
+        //add one valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        menuGroupCode: "mgcc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
+        roleName: "adminOne",
+        menuGroup: [{
+          tenantId: "tid",
           applicationCode: "CDA",
-          menuItemCode: "micc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "active",
-      processingStatus: "unauthorized",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString()
-    },
+          menuGroupCode: "mgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "micc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmic",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "active",
+        processingStatus: "unauthorized",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString()
+      },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
@@ -740,34 +746,34 @@ describe('role model validation', () => {
   describe("testing update Role", () => {
     var id;
     let object1 = {
-      //add one valid role object here
-      tenantId: "tid",
-      applicationCode: "CDA",
-      roleName: "adminOne",
-      menuGroup: [{
+        //add one valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        menuGroupCode: "mgcc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
+        roleName: "adminOne",
+        menuGroup: [{
+          tenantId: "tid",
           applicationCode: "CDA",
-          menuItemCode: "micc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "active",
-      processingStatus: "unauthorized",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString()
-    },
+          menuGroupCode: "mgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "micc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmic",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "active",
+        processingStatus: "unauthorized",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString()
+      },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
