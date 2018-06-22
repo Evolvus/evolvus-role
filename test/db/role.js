@@ -34,16 +34,21 @@
        applicationCode: "CDA",
        menuGroupCode: "mgc",
        title: "menugroup title",
+       menuGroupOrder: 1,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
        menuItems: [{
          menuItemType: "queues",
          applicationCode: "CDA",
-         menuItemCode: "mic",
-         title: "menuItem title"
+         menuItemCode: "micc",
+         title: "menuItem title",
+         menuItemOrder: 1
        }, {
          menuItemType: "queues",
          applicationCode: "RTP",
-         menuItemCode: "mic",
-         title: "menuItem title"
+         menuItemCode: "mmic",
+         title: "menuItem title",
+         menuItemOrder: 1
        }]
      }],
      description: "role",
@@ -58,22 +63,27 @@
      // add a valid role object
      tenantId: "tid",
      applicationCode: "CDA",
-     roleName: "adminTwo",
+     roleName: "admin1",
      menuGroup: [{
        tenantId: "tid",
        applicationCode: "CDA",
-       menuGroupCode: "mgcc",
+       menuGroupCode: "mgc1",
        title: "menugroup title",
+       menuGroupOrder: 1,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
        menuItems: [{
          menuItemType: "queues",
          applicationCode: "CDA",
-         menuItemCode: "mijc",
-         title: "menuItem title"
+         menuItemCode: "micc1",
+         title: "menuItem title",
+         menuItemOrder: 1
        }, {
          menuItemType: "queues",
          applicationCode: "RTP",
-         menuItemCode: "micl",
-         title: "menuItem title"
+         menuItemCode: "mmic2",
+         title: "menuItem title",
+         menuItemOrder: 1
        }]
      }],
      description: "role",
@@ -108,16 +118,21 @@
            applicationCode: "CDA",
            menuGroupCode: "mgc",
            title: "menugroup title",
+           menuGroupOrder: 1,
+           createdBy: "kamalarani",
+           createdDate: new Date().toISOString(),
            menuItems: [{
              menuItemType: "queues",
              applicationCode: "CDA",
-             menuItemCode: "mic",
-             title: "menuItem title"
+             menuItemCode: "micc",
+             title: "menuItem title",
+             menuItemOrder: 1
            }, {
              menuItemType: "queues",
              applicationCode: "RTP",
-             menuItemCode: "miic",
-             title: "menuItem title"
+             menuItemCode: "mmic",
+             title: "menuItem title",
+             menuItemOrder: 1
            }]
          }],
          description: "role",
@@ -211,22 +226,27 @@
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "adminOne",
+       roleName: "admin",
        menuGroup: [{
          tenantId: "tid",
          applicationCode: "CDA",
-         menuGroupCode: "mgcc",
+         menuGroupCode: "mgc",
          title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
          menuItems: [{
            menuItemType: "queues",
            applicationCode: "CDA",
            menuItemCode: "micc",
-           title: "menuItem title"
+           title: "menuItem title",
+           menuItemOrder: 1
          }, {
            menuItemType: "queues",
            applicationCode: "RTP",
            menuItemCode: "mmic",
-           title: "menuItem title"
+           title: "menuItem title",
+           menuItemOrder: 1
          }]
        }],
        description: "role",
@@ -241,22 +261,27 @@
        // add a valid role object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "adminTwo",
+       roleName: "admintwo",
        menuGroup: [{
          tenantId: "tid",
          applicationCode: "CDA",
-         menuGroupCode: "mgocc",
+         menuGroupCode: "mgc2",
          title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
          menuItems: [{
            menuItemType: "queues",
            applicationCode: "CDA",
-           menuItemCode: "miocc",
-           title: "menuItem title"
+           menuItemCode: "micc2",
+           title: "menuItem title",
+           menuItemOrder: 1
          }, {
            menuItemType: "queues",
            applicationCode: "RTP",
-           menuItemCode: "mmoic",
-           title: "menuItem title"
+           menuItemCode: "mmic22",
+           title: "menuItem title",
+           menuItemOrder: 1
          }]
        }],
        description: "role",
@@ -389,7 +414,7 @@
      });
    });
 
-   describe("testing roleMenuItemMap.find without data", () => {
+   describe("testing role.find without data", () => {
      // delete all records
      // find should return empty array
      beforeEach((done) => {
@@ -591,22 +616,27 @@
        //add valid object
        tenantId: "tid",
        applicationCode: "CDA",
-       roleName: "adminOne",
+       roleName: "admin",
        menuGroup: [{
          tenantId: "tid",
          applicationCode: "CDA",
-         menuGroupCode: "mgcc",
+         menuGroupCode: "mgc",
          title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
          menuItems: [{
            menuItemType: "queues",
            applicationCode: "CDA",
            menuItemCode: "micc",
-           title: "menuItem title"
+           title: "menuItem title",
+           menuItemOrder: 1
          }, {
            menuItemType: "queues",
            applicationCode: "RTP",
            menuItemCode: "mmic",
-           title: "menuItem title"
+           title: "menuItem title",
+           menuItemOrder: 1
          }]
        }],
        description: "role",
@@ -625,18 +655,23 @@
        menuGroup: [{
          tenantId: "tid",
          applicationCode: "CDA",
-         menuGroupCode: "mqgcc",
+         menuGroupCode: "mgca",
          title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
          menuItems: [{
            menuItemType: "queues",
            applicationCode: "CDA",
-           menuItemCode: "mqicc",
-           title: "menuItem title"
+           menuItemCode: "micca",
+           title: "menuItem title",
+           menuItemOrder: 1
          }, {
            menuItemType: "queues",
            applicationCode: "RTP",
-           menuItemCode: "mqmic",
-           title: "menuItem title"
+           menuItemCode: "mmica",
+           title: "menuItem title",
+           menuItemOrder: 1
          }]
        }],
        description: "role",
@@ -684,6 +719,76 @@
    describe('testing update role', () => {
      //Delete all the recods from database
      //add 2 roles
+     let object1 = {
+       //add valid object
+       tenantId: "tid",
+       applicationCode: "CDA",
+       roleName: "admin",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgc",
+         title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micc",
+           title: "menuItem title",
+           menuItemOrder: 1
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmic",
+           title: "menuItem title",
+           menuItemOrder: 1
+         }]
+       }],
+       description: "role",
+       activationStatus: "active",
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
+     };
+     let object2 = {
+       //add valid object with one attribute value same as "role1"
+       tenantId: "tid",
+       applicationCode: "CDA",
+       roleName: "adminTwo",
+       menuGroup: [{
+         tenantId: "tid",
+         applicationCode: "CDA",
+         menuGroupCode: "mgca",
+         title: "menugroup title",
+         menuGroupOrder: 1,
+         createdBy: "kamalarani",
+         createdDate: new Date().toISOString(),
+         menuItems: [{
+           menuItemType: "queues",
+           applicationCode: "CDA",
+           menuItemCode: "micca",
+           title: "menuItem title",
+           menuItemOrder: 1
+         }, {
+           menuItemType: "queues",
+           applicationCode: "RTP",
+           menuItemCode: "mmica",
+           title: "menuItem title",
+           menuItemOrder: 1
+         }]
+       }],
+       description: "role",
+       activationStatus: "active",
+       processingStatus: "unauthorized",
+       associatedUsers: 5,
+       createdBy: "kamalarani",
+       createdDate: new Date().toISOString(),
+       lastUpdatedDate: new Date().toISOString()
+     };
      let id;
      let update = {
        applicationCode: "CDA",
