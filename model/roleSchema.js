@@ -23,60 +23,82 @@ module.exports.schema = {
     },
     "menuGroup": {
       "type": "array",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 64
-        },
-        "applicationCode": {
-          "type": "string",
-          "minLength": 3,
-          "maxLength": 20
-        },
-        "menuGroupCode": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 20
-        },
-        "title": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 20
-        },
-        "selectedFlag": {
-          "type": "boolean",
-          "default": "false"
-        },
-        "menuItems": {
-          "type": "array",
-          "properties": {
-            "menuItemType": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 20
-            },
-            "applicationCode": {
-              "type": "string",
-              "minLength": 3,
-              "maxLength": 20
-            },
-            "menuItemCode": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 20
-            },
-            "title": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 20
-            },
-            "selectedFlag": {
-              "type": "boolean",
-              "default": "false"
+      "minItems": 1,
+      "items": {
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "applicationCode": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20
+          },
+          "menuGroupCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "selectedFlag": {
+            "type": "boolean",
+            "default": "false"
+          },
+          "menuGroupOrder": {
+            "type": "number"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "menuItems": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "properties": {
+                "menuItemType": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "applicationCode": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 20
+                },
+                "menuItemCode": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "selectedFlag": {
+                  "type": "boolean",
+                  "default": "false"
+                },
+                "menuItemOrder": {
+                  "type": "number",
+                  "required": "true"
+                }
+              },
+              "required": ["menuItemType", "applicationCode", "menuItemCode", "title", "menuItemOrder"]
             }
           }
-        }
+        },
+        "required": ["tenantId", "applicationCode", "menuGroupCode", "menuGroupOrder", "title", "createdDate", "createdBy", "menuItems"]
       }
     },
     "description": {
