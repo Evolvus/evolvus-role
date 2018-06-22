@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const { menu } = require("evolvus-menu");
+const {
+  menu
+} = require("evolvus-menu");
 
 var Menu = mongoose.model("menuCollection", menu.menuDBschema);
 
@@ -25,7 +27,7 @@ var roleSchema = new mongoose.Schema({
     minLength: 1,
     maxLength: 20,
     validate: {
-      validator: function (v) {
+      validator: function(v) {
         return /^[A-Za-z ]*$/.test(v);
       },
       message: "{PATH} can contain only alphabets and spaces"
@@ -33,16 +35,18 @@ var roleSchema = new mongoose.Schema({
   },
   menuGroup: {
     type: Array,
-    ref: 'Menu',
-    required:true
+    minItems: 1,
+    items: {
+      ref: 'Menu'
+    },
+    required: true
   },
   description: {
     type: String,
-    required: true,
     minLength: 0,
     maxLength: 255,
     validate: {
-      validator: function (v) {
+      validator: function(v) {
         return /^[A-Za-z ]*$/.test(v);
       },
       message: "{PATH} can contain only alphabets and spaces"
