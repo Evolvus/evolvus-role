@@ -1,84 +1,92 @@
  const debug = require("debug")("evolvus-role:index");
  const roleSchema = require("./model/roleSchema")
-   .schema;
+     .schema;
  const roleCollection = require("./db/role");
  const validate = require("jsonschema")
-   .validate;
+     .validate;
  const docketClient = require("evolvus-docket-client");
 
+ const roleDBSchema = require("./db/roleSchema")
+
+
  var docketObject = {
-   // required fields
-   application: "PLATFORM",
-   source: "role",
-   name: "",
-   createdBy: "",
-   ipAddress: "",
-   status: "SUCCESS", //by default
-   eventDateTime: Date.now(),
-   keyDataAsJSON: "",
-   details: "",
-   //non required fields
-   level: ""
+     // required fields
+     application: "PLATFORM",
+     source: "role",
+     name: "",
+     createdBy: "",
+     ipAddress: "",
+     status: "SUCCESS", //by default
+     eventDateTime: Date.now(),
+     keyDataAsJSON: "",
+     details: "",
+     //non required fields
+     level: ""
  };
 
+ module.exports.role = {
+     roleSchema,
+     roleDBSchema
+ }
+
  module.exports.validate = (roleObject) => {
-   return new Promise((resolve, reject) => {
-     try {
-       if (typeof roleObject === "undefined") {
-         throw new Error("IllegalArgumentException:roleObject is undefined");
-       }
-       var res = validate(roleObject, roleSchema);
-       debug("validation status: ", JSON.stringify(res));
-       if (res.valid) {
-         resolve(res.valid);
-       } else {
-         reject(res.errors);
-       }
-     } catch (err) {
-       reject(err);
-     }
-   });
+     return new Promise((resolve, reject) => {
+         try {
+             if (typeof roleObject === "undefined") {
+                 throw new Error("IllegalArgumentException:roleObject is undefined");
+             }
+             var res = validate(roleObject, roleSchema);
+             debug("validation status: ", JSON.stringify(res));
+             if (res.valid) {
+                 resolve(res.valid);
+             } else {
+                 reject(res.errors);
+             }
+         } catch (err) {
+             reject(err);
+         }
+     });
  };
 
  // All validations must be performed before we save the object here
  // Once the db layer is called its is assumed the object is valid.
  module.exports.save = (roleObject) => {
-   return new Promise((resolve, reject) => {
-     try {
-       if (typeof roleObject === 'undefined' || roleObject == null) {
-         throw new Error("IllegalArgumentException: roleObject is null or undefined");
-       }
-       docketObject.name = "role_save";
-       docketObject.keyDataAsJSON = JSON.stringify(roleObject);
-       docketObject.details = `role creation initiated`;
-       docketClient.postToDocket(docketObject);
-       var res = validate(roleObject, roleSchema);
-       debug("validation status: ", JSON.stringify(res));
-       if (!res.valid) {
-         reject(res.errors);
-       }
+     return new Promise((resolve, reject) => {
+         try {
+             if (typeof roleObject === 'undefined' || roleObject == null) {
+                 throw new Error("IllegalArgumentException: roleObject is null or undefined");
+             }
+             docketObject.name = "role_save";
+             docketObject.keyDataAsJSON = JSON.stringify(roleObject);
+             docketObject.details = `role creation initiated`;
+             docketClient.postToDocket(docketObject);
+             var res = validate(roleObject, roleSchema);
+             debug("validation status: ", JSON.stringify(res));
+             if (!res.valid) {
+                 reject(res.errors);
+             }
 
-       // Other validations here
-       else {
-         roleCollection.save(roleObject).then((result) => {
-           debug(`saved successfully ${result}`);
-           resolve(result);
-         }).catch((e) => {
-           debug(`failed to save with an error: ${e}`);
-           reject(e);
-         });
-       }
-       // if the object is valid, save the object to the database
+             // Other validations here
+             else {
+                 roleCollection.save(roleObject).then((result) => {
+                     debug(`saved successfully ${result}`);
+                     resolve(result);
+                 }).catch((e) => {
+                     debug(`failed to save with an error: ${e}`);
+                     reject(e);
+                 });
+             }
+             // if the object is valid, save the object to the database
 
-     } catch (e) {
-       docketObject.name = "role_ExceptionOnSave";
-       docketObject.keyDataAsJSON = JSON.stringify(roleObject);
-       docketObject.details = `caught Exception on role_save ${e.message}`;
-       docketClient.postToDocket(docketObject);
-       debug(`caught exception ${e}`);
-       reject(e);
-     }
-   });
+         } catch (e) {
+             docketObject.name = "role_ExceptionOnSave";
+             docketObject.keyDataAsJSON = JSON.stringify(roleObject);
+             docketObject.details = `caught Exception on role_save ${e.message}`;
+             docketClient.postToDocket(docketObject);
+             debug(`caught exception ${e}`);
+             reject(e);
+         }
+     });
  };
 
  // List all the objects in the database
@@ -121,109 +129,109 @@
 
  // Get the entity idenfied by the id parameter
  module.exports.getById = (id) => {
-   return new Promise((resolve, reject) => {
-     try {
+     return new Promise((resolve, reject) => {
+         try {
 
-       if (typeof(id) == "undefined" || id == null) {
-         throw new Error("IllegalArgumentException: id is null or undefined");
-       }
-       docketObject.name = "role_getById";
-       docketObject.keyDataAsJSON = `roleObject id is ${id}`;
-       docketObject.details = `role getById initiated`;
-       docketClient.postToDocket(docketObject);
+             if (typeof(id) == "undefined" || id == null) {
+                 throw new Error("IllegalArgumentException: id is null or undefined");
+             }
+             docketObject.name = "role_getById";
+             docketObject.keyDataAsJSON = `roleObject id is ${id}`;
+             docketObject.details = `role getById initiated`;
+             docketClient.postToDocket(docketObject);
 
-       roleCollection.findById(id)
-         .then((res) => {
-           if (res) {
-             debug(`role found by id ${id} is ${res}`);
-             resolve(res);
-           } else {
-             // return empty object in place of null
-             debug(`no role found by this id ${id}`);
-             resolve({});
-           }
-         }).catch((e) => {
-           debug(`failed to find role ${e}`);
-           reject(e);
-         });
+             roleCollection.findById(id)
+                 .then((res) => {
+                     if (res) {
+                         debug(`role found by id ${id} is ${res}`);
+                         resolve(res);
+                     } else {
+                         // return empty object in place of null
+                         debug(`no role found by this id ${id}`);
+                         resolve({});
+                     }
+                 }).catch((e) => {
+                     debug(`failed to find role ${e}`);
+                     reject(e);
+                 });
 
-     } catch (e) {
-       docketObject.name = "role_ExceptionOngetById";
-       docketObject.keyDataAsJSON = `roleObject id is ${id}`;
-       docketObject.details = `caught Exception on role_getById ${e.message}`;
-       docketClient.postToDocket(docketObject);
-       debug(`caught exception ${e}`);
-       reject(e);
-     }
-   });
+         } catch (e) {
+             docketObject.name = "role_ExceptionOngetById";
+             docketObject.keyDataAsJSON = `roleObject id is ${id}`;
+             docketObject.details = `caught Exception on role_getById ${e.message}`;
+             docketClient.postToDocket(docketObject);
+             debug(`caught exception ${e}`);
+             reject(e);
+         }
+     });
  };
 
  module.exports.getOne = (attribute, value) => {
-   return new Promise((resolve, reject) => {
-     try {
-       if (attribute == null || value == null || typeof attribute === 'undefined' || typeof value === 'undefined') {
-         throw new Error("IllegalArgumentException: attribute/value is null or undefined");
-       }
+     return new Promise((resolve, reject) => {
+         try {
+             if (attribute == null || value == null || typeof attribute === 'undefined' || typeof value === 'undefined') {
+                 throw new Error("IllegalArgumentException: attribute/value is null or undefined");
+             }
 
-       docketObject.name = "role_getOne";
-       docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
-       docketObject.details = `role getOne initiated`;
-       docketClient.postToDocket(docketObject);
-       roleCollection.findOne(attribute, value).then((data) => {
-         if (data) {
-           debug(`role found ${data}`);
-           resolve(data);
-         } else {
-           // return empty object in place of null
-           debug(`no role found by this ${attribute} ${value}`);
-           resolve({});
+             docketObject.name = "role_getOne";
+             docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
+             docketObject.details = `role getOne initiated`;
+             docketClient.postToDocket(docketObject);
+             roleCollection.findOne(attribute, value).then((data) => {
+                 if (data) {
+                     debug(`role found ${data}`);
+                     resolve(data);
+                 } else {
+                     // return empty object in place of null
+                     debug(`no role found by this ${attribute} ${value}`);
+                     resolve({});
+                 }
+             }).catch((e) => {
+                 debug(`failed to find ${e}`);
+             });
+         } catch (e) {
+             docketObject.name = "role_ExceptionOngetOne";
+             docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
+             docketObject.details = `caught Exception on role_getOne ${e.message}`;
+             docketClient.postToDocket(docketObject);
+             debug(`caught exception ${e}`);
+             reject(e);
          }
-       }).catch((e) => {
-         debug(`failed to find ${e}`);
-       });
-     } catch (e) {
-       docketObject.name = "role_ExceptionOngetOne";
-       docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
-       docketObject.details = `caught Exception on role_getOne ${e.message}`;
-       docketClient.postToDocket(docketObject);
-       debug(`caught exception ${e}`);
-       reject(e);
-     }
-   });
+     });
  };
 
  module.exports.getMany = (attribute, value) => {
-   return new Promise((resolve, reject) => {
-     try {
-       if (attribute == null || value == null || typeof attribute === 'undefined' || typeof value === 'undefined') {
-         throw new Error("IllegalArgumentException: attribute/value is null or undefined");
-       }
+     return new Promise((resolve, reject) => {
+         try {
+             if (attribute == null || value == null || typeof attribute === 'undefined' || typeof value === 'undefined') {
+                 throw new Error("IllegalArgumentException: attribute/value is null or undefined");
+             }
 
-       docketObject.name = "role_getMany";
-       docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
-       docketObject.details = `role getMany initiated`;
-       docketClient.postToDocket(docketObject);
-       roleCollection.findMany(attribute, value).then((data) => {
-         if (data) {
-           debug(`role found ${data}`);
-           resolve(data);
-         } else {
-           // return empty object in place of null
-           debug(`no role found by this ${attribute} ${value}`);
-           resolve([]);
+             docketObject.name = "role_getMany";
+             docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
+             docketObject.details = `role getMany initiated`;
+             docketClient.postToDocket(docketObject);
+             roleCollection.findMany(attribute, value).then((data) => {
+                 if (data) {
+                     debug(`role found ${data}`);
+                     resolve(data);
+                 } else {
+                     // return empty object in place of null
+                     debug(`no role found by this ${attribute} ${value}`);
+                     resolve([]);
+                 }
+             }).catch((e) => {
+                 debug(`failed to find ${e}`);
+             });
+         } catch (e) {
+             docketObject.name = "role_ExceptionOngetMany";
+             docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
+             docketObject.details = `caught Exception on role_getMany ${e.message}`;
+             docketClient.postToDocket(docketObject);
+             debug(`caught exception ${e}`);
+             reject(e);
          }
-       }).catch((e) => {
-         debug(`failed to find ${e}`);
-       });
-     } catch (e) {
-       docketObject.name = "role_ExceptionOngetMany";
-       docketObject.keyDataAsJSON = `roleObject ${attribute} with value ${value}`;
-       docketObject.details = `caught Exception on role_getMany ${e.message}`;
-       docketClient.postToDocket(docketObject);
-       debug(`caught exception ${e}`);
-       reject(e);
-     }
-   });
+     });
  };
 
  module.exports.update = (id, update) => {
