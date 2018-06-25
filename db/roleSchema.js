@@ -85,6 +85,14 @@ var roleSchema = new mongoose.Schema({
   associatedUsers: {
     type: Number,
     required: true
+  },
+  accessLevel: {
+    type: Number,
+    required: true
+  },
+  entityCode: {
+    type: String,
+    required: true
   }
 });
 module.exports = roleSchema;
