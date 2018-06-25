@@ -21,6 +21,8 @@ describe('role model validation', () => {
   let roleObject = {
     // add a valid role Object here
     tenantId: "tid",
+    entityCode: "Entity",
+    accessLevel: 0,
     applicationCode: "CDA",
     roleName: "admin",
     menuGroup: [{
@@ -57,6 +59,8 @@ describe('role model validation', () => {
   let invalidObject = {
     //add invalid role Object here
     tenantId: "tid",
+    entityCode: "Entity",
+    accessLevel: 0,
     applicationCode: 457,
     roleName: 457,
     menuGroup: [{
@@ -123,26 +127,26 @@ describe('role model validation', () => {
     });
 
     if ("should error out for undefined objects", (done) => {
-        try {
-          var res = role.validate(undefinedObject);
-          expect(res)
-            .to.be.rejected
-            .notify(done);
-        } catch (e) {
-          expect.fail(e, null, `exception: ${e}`);
-        }
-      });
+      try {
+        var res = role.validate(undefinedObject);
+        expect(res)
+          .to.be.rejected
+          .notify(done);
+      } catch (e) {
+        expect.fail(e, null, `exception: ${e}`);
+      }
+    });
 
     if ("should error out for null objects", (done) => {
-        try {
-          var res = role.validate(nullObject);
-          expect(res)
-            .to.be.rejected
-            .notify(done);
-        } catch (e) {
-          expect.fail(e, null, `exception: ${e}`);
-        }
-      });
+      try {
+        var res = role.validate(nullObject);
+        expect(res)
+          .to.be.rejected
+          .notify(done);
+      } catch (e) {
+        expect.fail(e, null, `exception: ${e}`);
+      }
+    });
 
   });
 
@@ -182,38 +186,42 @@ describe('role model validation', () => {
 
   describe('testing role.getAll when there is data in database', () => {
     let object1 = {
-        //add one valid role object here
+      //add one valid role object here
+      tenantId: "tid",
+      entityCode: "Entity",
+      accessLevel: 0,
+      applicationCode: "CDA",
+      roleName: "adminThree",
+      menuGroup: [{
         tenantId: "tid",
         applicationCode: "CDA",
-        roleName: "adminOne",
-        menuGroup: [{
-          tenantId: "tid",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
           applicationCode: "CDA",
-          menuGroupCode: "mgcc",
-          title: "menugroup title",
-          menuItems: [{
-            menuItemType: "queues",
-            applicationCode: "CDA",
-            menuItemCode: "micc",
-            title: "menuItem title"
-          }, {
-            menuItemType: "queues",
-            applicationCode: "RTP",
-            menuItemCode: "mmic",
-            title: "menuItem title"
-          }]
-        }],
-        description: "role",
-        activationStatus: "active",
-        processingStatus: "unauthorized",
-        associatedUsers: 5,
-        createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
-      },
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
+      description: "role",
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString()
+    },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
+        entityCode: "Entity",
+        accessLevel: 0,
         roleName: "adminTwo",
         menuGroup: [{
           tenantId: "tid",
@@ -241,8 +249,10 @@ describe('role model validation', () => {
       },
       object3 = {
         tenantId: "tid",
+        entityCode: "Entity",
+        accessLevel: 0,
         applicationCode: "CDA",
-        roleName: "adminThree",
+        roleName: "adminOne",
         menuGroup: [{
           tenantId: "tid",
           applicationCode: "CDA",
@@ -281,7 +291,10 @@ describe('role model validation', () => {
 
     it('should return limited records as specified by the limit parameter', (done) => {
       try {
-        let res = role.getAll(2);
+        let orderBy={
+          roleName:1
+        };
+        let res = role.getAll('tid','Entity', 0, 2, orderBy);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -295,9 +308,12 @@ describe('role model validation', () => {
       }
     });
 
-    it('should return all records if limit is -1', (done) => {
+    it('should return all records if limit is null or undefined', (done) => {
       try {
-        let res = role.getAll(-1);
+        let orderBy={
+          roleName:1
+        };
+        let res = role.getAll('tid','Entity', 0, null, orderBy);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -311,24 +327,42 @@ describe('role model validation', () => {
       }
     });
 
-    it('should throw IllegalArgumentException for null value of limit', (done) => {
+    it('should return records sorted by Role name if orderBy is null or undefined', (done) => {
       try {
-        let res = role.getAll(null);
+        let res = role.getAll('tid','Entity', 0, 2, null);
         expect(res)
-          .to.be.rejectedWith("IllegalArgumentException")
-          .notify(done);
+          .to.be.fulfilled.then((docs) => {
+            expect(docs)
+              .to.be.a('array');
+            expect(docs.length)
+              .to.equal(2);
+            expect(docs[0])
+              .to.have.property('roleName')
+              .to.eql('adminOne');
+            done();
+          });
       } catch (e) {
         expect.fail(e, null, `exception: ${e}`);
       }
     });
 
-    it('should throw IllegalArgumentException for undefined value of limit', (done) => {
+    it('should return records sorted by Role name', (done) => {
       try {
-        let undefinedLimit;
-        let res = role.getAll(undefinedLimit);
+        let orderBy={
+          roleName:-1
+        };
+        let res = role.getAll('tid','Entity', 0, 2, orderBy);
         expect(res)
-          .to.be.rejectedWith("IllegalArgumentException")
-          .notify(done);
+          .to.be.fulfilled.then((docs) => {
+            expect(docs)
+              .to.be.a('array');
+            expect(docs.length)
+              .to.equal(2);
+            expect(docs[0])
+              .to.have.property('roleName')
+              .to.eql('adminTwo');
+            done();
+          });
       } catch (e) {
         expect.fail(e, null, `exception: ${e}`);
       }
@@ -346,25 +380,7 @@ describe('role model validation', () => {
 
     it('should return empty array when limit is -1', (done) => {
       try {
-        let res = role.getAll(-1);
-        expect(res)
-          .to.be.fulfilled.then((docs) => {
-            expect(docs)
-              .to.be.a('array');
-            expect(docs.length)
-              .to.equal(0);
-            expect(docs)
-              .to.eql([]);
-            done();
-          });
-      } catch (e) {
-        expect.fail(e, null, `exception: ${e}`);
-      }
-    });
-
-    it('should return empty array when limit is positive value ', (done) => {
-      try {
-        let res = role.getAll(2);
+        let res = role.getAll('tid', 'Entity', 0, 2, null);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -455,37 +471,41 @@ describe('role model validation', () => {
 
   describe("testing role.getOne", () => {
     let object1 = {
-        //add one valid role object here
+      //add one valid role object here
+      tenantId: "tid",
+      entityCode: "Entity",
+      accessLevel: 0,
+      applicationCode: "CDA",
+      roleName: "adminOne",
+      menuGroup: [{
         tenantId: "tid",
         applicationCode: "CDA",
-        roleName: "adminOne",
-        menuGroup: [{
-          tenantId: "tid",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
           applicationCode: "CDA",
-          menuGroupCode: "mgcc",
-          title: "menugroup title",
-          menuItems: [{
-            menuItemType: "queues",
-            applicationCode: "CDA",
-            menuItemCode: "micc",
-            title: "menuItem title"
-          }, {
-            menuItemType: "queues",
-            applicationCode: "RTP",
-            menuItemCode: "mmic",
-            title: "menuItem title"
-          }]
-        }],
-        description: "role",
-        activationStatus: "active",
-        processingStatus: "unauthorized",
-        associatedUsers: 5,
-        createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
-      },
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
+      description: "role",
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString()
+    },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
+        entityCode: "Entity",
+        accessLevel: 0,
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -601,37 +621,41 @@ describe('role model validation', () => {
 
   describe("testing role.getMany", () => {
     let object1 = {
-        //add one valid role object here
+      //add one valid role object here
+      tenantId: "tid",
+      entityCode: "Entity",
+      accessLevel: 0,
+      applicationCode: "CDA",
+      roleName: "adminOne",
+      menuGroup: [{
         tenantId: "tid",
         applicationCode: "CDA",
-        roleName: "adminOne",
-        menuGroup: [{
-          tenantId: "tid",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
           applicationCode: "CDA",
-          menuGroupCode: "mgcc",
-          title: "menugroup title",
-          menuItems: [{
-            menuItemType: "queues",
-            applicationCode: "CDA",
-            menuItemCode: "micc",
-            title: "menuItem title"
-          }, {
-            menuItemType: "queues",
-            applicationCode: "RTP",
-            menuItemCode: "mmic",
-            title: "menuItem title"
-          }]
-        }],
-        description: "role",
-        activationStatus: "active",
-        processingStatus: "unauthorized",
-        associatedUsers: 5,
-        createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
-      },
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
+      description: "role",
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString()
+    },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
+        entityCode: "Entity",
+        accessLevel: 0,
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -746,37 +770,41 @@ describe('role model validation', () => {
   describe("testing update Role", () => {
     var id;
     let object1 = {
-        //add one valid role object here
+      //add one valid role object here
+      tenantId: "tid",
+      entityCode: "Entity",
+      accessLevel: 0,
+      applicationCode: "CDA",
+      roleName: "adminOne",
+      menuGroup: [{
         tenantId: "tid",
         applicationCode: "CDA",
-        roleName: "adminOne",
-        menuGroup: [{
-          tenantId: "tid",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
           applicationCode: "CDA",
-          menuGroupCode: "mgcc",
-          title: "menugroup title",
-          menuItems: [{
-            menuItemType: "queues",
-            applicationCode: "CDA",
-            menuItemCode: "micc",
-            title: "menuItem title"
-          }, {
-            menuItemType: "queues",
-            applicationCode: "RTP",
-            menuItemCode: "mmic",
-            title: "menuItem title"
-          }]
-        }],
-        description: "role",
-        activationStatus: "active",
-        processingStatus: "unauthorized",
-        associatedUsers: 5,
-        createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
-      },
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
+      description: "role",
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString()
+    },
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
+        entityCode: "Entity",
+        accessLevel: 0,
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -876,5 +904,126 @@ describe('role model validation', () => {
         .to.eventually.to.be.rejectedWith("IllegalArgumentException")
         .notify(done);
     });
+  });
+
+  describe("testing filterByRoleDetails", () => {
+
+    let object1 = {
+      //add one valid role object here
+      tenantId: "tid",
+      entityCode: "Entity",
+      accessLevel: 0,
+      applicationCode: "CDA",
+      roleName: "adminThree",
+      menuGroup: [{
+        tenantId: "tid",
+        applicationCode: "CDA",
+        menuGroupCode: "mgcc",
+        title: "menugroup title",
+        menuItems: [{
+          menuItemType: "queues",
+          applicationCode: "CDA",
+          menuItemCode: "micc",
+          title: "menuItem title"
+        }, {
+          menuItemType: "queues",
+          applicationCode: "RTP",
+          menuItemCode: "mmic",
+          title: "menuItem title"
+        }]
+      }],
+      description: "role",
+      activationStatus: "active",
+      processingStatus: "unauthorized",
+      associatedUsers: 5,
+      createdBy: "kamalarani",
+      createdDate: new Date().toISOString()
+    },
+      object2 = {
+        //add one more valid role object here
+        tenantId: "tid",
+        applicationCode: "CDA",
+        entityCode: "Entity",
+        accessLevel: 0,
+        roleName: "adminTwo",
+        menuGroup: [{
+          tenantId: "tid",
+          applicationCode: "CDA",
+          menuGroupCode: "mrgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "mircc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmric",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "active",
+        processingStatus: "unauthorized",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString()
+      };
+
+    beforeEach((done) => {
+      db.deleteAll()
+        .then((res) => {
+          db.save(object1)
+            .then((res) => {
+              id = res._id;
+              db.save(object2)
+                .then((res) => {
+                  done();
+                });
+            });
+        });
+    });
+
+    //Query by processing status as unauthorized, activationStatus as inactive and applicationCode as CDA
+    // It should return array with only one object
+    it("should return filterd values based on query ", (done) => {
+      var res = role.filterByRoleDetails({
+        processingStatus: 'unauthorized',
+        applicationCode: 'CDA',
+        activationStatus: 'active'
+      });
+      expect(res).to.eventually.be.a("array")
+        .to.have.length(2)
+        .notify(done);
+    });
+
+    //Query by activation status as active
+    //It should return empty array as there are no roles with activation status as inactive
+    it("should return empty array as there are no roles matching the query parameter ", (done) => {
+      var res = role.filterByRoleDetails({
+        activationStatus: 'inactive'
+      });
+      expect(res).to.eventually.be.a("array")
+        .to.have.length(0)
+        .notify(done);
+    });
+
+
+    it("should throw IllegalArgumentException for null query parameter ", (done) => {
+      let res = role.filterByRoleDetails(null);
+      expect(res)
+        .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+        .notify(done);
+    });
+
+    it("should throw IllegalArgumentException for undefined query parameter ", (done) => {
+      let undefinedQuery;
+      let res = role.filterByRoleDetails(undefinedQuery);
+      expect(res)
+        .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+        .notify(done);
+    });
+
   });
 });
