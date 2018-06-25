@@ -42,12 +42,22 @@ module.exports.save = (object) => {
 // Returns a limited set if all the role(s) with a Promise
 // if the collectiom has no records it Returns
 // a promise with a result of  empty object i.e. {}
-module.exports.findAll = (limit) => {
-  if (limit < 1) {
-    return roleCollection.find({});
+module.exports.findAll = (tenantId, entityCode, accessLevel, limit, orderBy) => {
+  let query = {
+    tenantId: tenantId,
+    accessLevel: {
+      $gte: accessLevel
+    },
+    entityCode: entityCode
+  };  
+
+  if (limit < 1) {    
+    return roleCollection.find(query).sort(orderBy);
+  } else {
+    return roleCollection.find(query).limit(limit).sort(orderBy);
   }
-  return roleCollection.find({}).limit(limit);
 };
+
 
 // Finds the role which matches the value parameter from role collection
 // If there is no object matching the attribute/value, return empty object i.e. {}
@@ -114,8 +124,8 @@ module.exports.findById = (id) => {
   return new Promise((resolve, reject) => {
     try {
       roleCollection.findById({
-        _id: new ObjectId(id)
-      })
+          _id: new ObjectId(id)
+        })
         .then((res) => {
           debug("findById successfull: ", res);
           resolve(res);
@@ -161,6 +171,26 @@ module.exports.update = (id, update) => {
     } catch (e) {
       debug(`caught exception ${e}`);
       reject(e.message);
+    }
+  });
+};
+
+// Filters role collection by roleDetails
+// Returns a promise
+
+module.exports.filterByRoleDetails = (filterQuery) => {
+  return new Promise((resolve, reject) => {
+    try {
+      roleCollection.find(filterQuery).then((docs) => {
+        debug(`Documents filterd by ${filterQuery} are ${docs}`);
+        resolve(docs);
+      }).catch((e) => {
+        debug(`Failed to filter due to ${e}`);
+        reject(e);
+      });
+    } catch (e) {
+      debug(`Caught Exception ${e}`);
+      reject(e);
     }
   });
 };

@@ -84,18 +84,23 @@
  // List all the objects in the database
  // makes sense to return on a limited number
  // (what if there are 1000000 records in the collection)
- module.exports.getAll = (limit) => {
+ module.exports.getAll = (tenantId,entityCode,accessLevel,limit,orderBy) => {
    return new Promise((resolve, reject) => {
      try {
-       if (typeof(limit) == "undefined" || limit == null) {
-         throw new Error("IllegalArgumentException: limit is null or undefined");
+       if (limit == null) {
+        limit=-1;
+       }
+       if(orderBy==null){
+         orderBy={
+           roleName:1
+         };
        }
        docketObject.name = "role_getAll";
        docketObject.keyDataAsJSON = `getAll with limit ${limit}`;
        docketObject.details = `role getAll method`;
        docketClient.postToDocket(docketObject);
 
-       roleCollection.findAll(limit).then((docs) => {
+       roleCollection.findAll(tenantId,entityCode,accessLevel,limit,orderBy).then((docs) => {
          debug(`role(s) stored in the database are ${docs}`);
          resolve(docs);
        }).catch((e) => {
@@ -242,6 +247,39 @@
        docketObject.name = "role_ExceptionOnUpdate";
        docketObject.keyDataAsJSON = `roleObject ${id} to be updated with  ${update}`;
        docketObject.details = `caught Exception on role_update ${e.message}`;
+       docketClient.postToDocket(docketObject);
+       debug(`caught exception ${e}`);
+       reject(e);
+     }
+   });
+ };
+
+ module.exports.filterByRoleDetails = (filterQuery) => {
+   return new Promise((resolve, reject) => {
+     try {
+       if (filterQuery == null) {
+         throw new Error(`IllegalArgumentException: filterQuery is ${filterQuery}`);
+       }
+
+       docketObject.name = "role_filterByRoleDetails";
+       docketObject.keyDataAsJSON = `Filter the role collection by query ${filterQuery}`;
+       docketObject.details = `role_filterByRoleDetails initiated`;
+       docketClient.postToDocket(docketObject);
+       roleCollection.filterByRoleDetails(filterQuery).then((filteredData) => {
+         if (filteredData.length > 0) {
+           debug(`filtered Data is ${filteredData}`);
+           resolve(filteredData);
+         } else {
+           debug(`No data available for filter query ${filterQuery}`);
+           resolve([]);
+         }
+       }).catch((e) => {
+         debug(`failed to find ${e}`);
+       });
+     } catch (e) {
+       docketObject.name = "role_ExceptionOnFilterByRoleDetails";
+       docketObject.keyDataAsJSON = `Filter the role collection by query ${filterQuery}`;
+       docketObject.details = `caught Exception on role_filterByRoleDetails ${e.message}`;
        docketClient.postToDocket(docketObject);
        debug(`caught exception ${e}`);
        reject(e);
