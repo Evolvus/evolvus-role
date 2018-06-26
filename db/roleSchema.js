@@ -43,7 +43,7 @@ var roleSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minLength: 0,
+    minLength: 1,
     maxLength: 255,
     validate: {
       validator: function(v) {

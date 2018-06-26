@@ -103,7 +103,7 @@ module.exports.schema = {
     },
     "description": {
       "type": "string",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 255
     },
     "createdBy": {
