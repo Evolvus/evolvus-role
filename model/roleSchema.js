@@ -134,17 +134,18 @@ module.exports.schema = {
     },
     "processingStatus": {
       "type": "string",
-      "enum": ["authorized", "unauthorized", "rejected"]
+      "enum": ["Pending Authorization", "Authorized", "Rejected"],
+      "default": "Pending Authorization"
     },
     "associatedUsers": {
       "type": "number"
     },
-    "accessLevel":{
-      "type":"number"
+    "accessLevel": {
+      "type": "number"
     },
-    "entityCode":{
-      "type":"string"
+    "entityCode": {
+      "type": "string"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate","accessLevel","entityCode"]
+  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "accessLevel", "entityCode"]
 };

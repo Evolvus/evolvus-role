@@ -50,7 +50,6 @@ describe("db role testing", () => {
     }],
     description: "role",
     activationStatus: "active",
-    processingStatus: "unauthorized",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -82,7 +81,7 @@ describe("db role testing", () => {
     }],
     description: "role",
     activationStatus: "active",
-    processingStatus: "unauthorized",
+    processingStatus: "Pending Authorization",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -136,7 +135,7 @@ describe("db role testing", () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -177,7 +176,7 @@ describe("db role testing", () => {
       }],
       description: "role",
       activationStatus: "active",
-      processingStatus: "unauthorized",
+      processingStatus: "Pending Authorization",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -209,7 +208,7 @@ describe("db role testing", () => {
       }],
       description: "role",
       activationStatus: "active",
-      processingStatus: "unauthorized",
+      processingStatus: "Pending Authorization",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -366,7 +365,7 @@ describe("db role testing", () => {
       }],
       description: "role",
       activationStatus: "active",
-      processingStatus: "unauthorized",
+      processingStatus: "Pending Authorization",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -534,11 +533,11 @@ describe("db role testing", () => {
       });
     });
 
-    //Query by processing status as unauthorized, activationStatus as active and applicationCode as CDA
+    //Query by processing status as Pending Authorization, activationStatus as active and applicationCode as CDA
     // It should return array of 2 objects
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'unauthorized',
+        processingStatus: 'Pending Authorization',
         applicationCode: 'CDA',
         activationStatus: 'active'
       });

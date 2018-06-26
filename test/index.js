@@ -49,7 +49,7 @@ describe('role model validation', () => {
     }],
     description: "role",
     activationStatus: "active",
-    processingStatus: "unauthorized",
+    processingStatus: "Pending Authorization",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -82,7 +82,7 @@ describe('role model validation', () => {
     }],
     description: "role",
     activationStatus: "active",
-    processingStatus: "unauthorized",
+    processingStatus: "Pending Authorization",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString()
@@ -211,7 +211,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -243,7 +243,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -274,7 +274,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -496,7 +496,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -527,7 +527,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -646,7 +646,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -677,7 +677,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -795,7 +795,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -826,7 +826,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -934,7 +934,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -965,7 +965,7 @@ describe('role model validation', () => {
         }],
         description: "role",
         activationStatus: "active",
-        processingStatus: "unauthorized",
+        processingStatus: "Pending Authorization",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString()
@@ -985,11 +985,11 @@ describe('role model validation', () => {
         });
     });
 
-    //Query by processing status as unauthorized, activationStatus as inactive and applicationCode as CDA
+    //Query by processing status as Pending Authorization, activationStatus as inactive and applicationCode as CDA
     // It should return array with only one object
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'unauthorized',
+        processingStatus: 'Pending Authorization',
         applicationCode: 'CDA',
         activationStatus: 'active'
       });
