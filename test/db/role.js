@@ -244,7 +244,7 @@ describe("db role testing", () => {
       };
       let res = role.findAll('tid', 'Entity', 1, -1, orderBy);
       expect(res)
-        .to.be.fulfilled.then((docs) => {          
+        .to.be.fulfilled.then((docs) => {
           expect(docs)
             .to.be.a('array');
           expect(docs.length)
