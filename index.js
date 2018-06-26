@@ -39,7 +39,7 @@ module.exports.validate = (roleObject) => {
       if (res.valid) {
         resolve(res.valid);
       } else {
-        reject(res.errors);
+        reject(res.errors[0].stack);
       }
     } catch (err) {
       reject(err);
