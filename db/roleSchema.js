@@ -4,7 +4,7 @@ const {
     menu
 } = require("evolvus-menu");
 
-var Menu = mongoose.model("menuCollection", menu.menuDBschema);
+var Menu = mongoose.model("menu", menu.menuDBschema);
 
 var roleSchema = new mongoose.Schema({
     // Add all attributes below tenantId

@@ -48,10 +48,11 @@ module.exports.findAll = (tenantId, entityCode, accessLevel, limit, orderBy) => 
     accessLevel: {
       $gte: accessLevel
     },
-    entityCode: entityCode
-  };  
+    entityCode: entityCode,
+    deletedFlag: 0
+  };
 
-  if (limit < 1) {    
+  if (limit < 1) {
     return roleCollection.find(query).sort(orderBy);
   } else {
     return roleCollection.find(query).limit(limit).sort(orderBy);
@@ -91,12 +92,12 @@ module.exports.findOne = (attribute, value) => {
 // If there is no object matching the attribute/value, return empty object i.e. {}
 // null, undefined should be rejected with Invalid Argument Error
 // Should return a Promise
-module.exports.findMany = (attribute, value) => {
+module.exports.findMany = (attribute, value, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
       var query = {};
       query[attribute] = value;
-      roleCollection.find(query)
+      roleCollection.find(query).sort(orderBy)
         .then((data) => {
           debug(`role found ${data}`);
           resolve(data);
@@ -178,10 +179,10 @@ module.exports.update = (id, update) => {
 // Filters role collection by roleDetails
 // Returns a promise
 
-module.exports.filterByRoleDetails = (filterQuery) => {
+module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
-      roleCollection.find(filterQuery).then((docs) => {
+      roleCollection.find(filterQuery).sort(orderBy).then((docs) => {
         debug(`Documents filterd by ${filterQuery} are ${docs}`);
         resolve(docs);
       }).catch((e) => {
