@@ -22,7 +22,7 @@ describe('role model validation', () => {
     // add a valid role Object here
     tenantId: "tid",
     entityCode: "Entity",
-    accessLevel: 0,
+    accessLevel: "0",
     applicationCode: "CDA",
     roleName: "admin",
     menuGroup: [{
@@ -60,7 +60,7 @@ describe('role model validation', () => {
     //add invalid role Object here
     tenantId: "tid",
     entityCode: "Entity",
-    accessLevel: 0,
+    accessLevel: "0",
     applicationCode: 457,
     roleName: 457,
     menuGroup: [{
@@ -190,7 +190,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminThree",
         menuGroup: [{
@@ -223,7 +223,7 @@ describe('role model validation', () => {
         tenantId: "tid",
         applicationCode: "CDA",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         roleName: "adminTwo",
         menuGroup: [{
           tenantId: "tid",
@@ -253,7 +253,7 @@ describe('role model validation', () => {
       object3 = {
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
         menuGroup: [{
@@ -475,7 +475,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
         menuGroup: [{
@@ -507,7 +507,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -627,7 +627,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
         menuGroup: [{
@@ -659,7 +659,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -778,7 +778,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
         menuGroup: [{
@@ -810,7 +810,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminTwo",
         menuGroup: [{
@@ -919,7 +919,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminThree",
         menuGroup: [{
@@ -952,7 +952,7 @@ describe('role model validation', () => {
         tenantId: "tid",
         applicationCode: "CDA",
         entityCode: "Entity",
-        accessLevel: 0,
+        accessLevel: "0",
         roleName: "adminTwo",
         menuGroup: [{
           tenantId: "tid",

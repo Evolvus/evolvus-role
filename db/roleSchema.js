@@ -84,15 +84,14 @@ var roleSchema = new mongoose.Schema({
   processingStatus: {
     type: String,
     enum: ['PENDING_AUTHORIZATION', 'AUTHORIZED', 'REJECTED'],
-    default: 'PENDING_AUTHORIZATION',
-    required: true
+    default: 'PENDING_AUTHORIZATION'
   },
   associatedUsers: {
     type: Number,
     required: true
   },
   accessLevel: {
-    type: Number,
+    type: String,
     required: true
   },
   entityCode: {

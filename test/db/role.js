@@ -28,7 +28,7 @@ describe("db role testing", () => {
     // add a valid role object
     tenantId: "tid",
     entityCode: "Entity",
-    accessLevel: 1,
+    accessLevel: "1",
     applicationCode: "CDA",
     roleName: "admin",
     menuGroup: [{
@@ -59,7 +59,7 @@ describe("db role testing", () => {
     // add a valid role object
     tenantId: "tid",
     entityCode: "Entity",
-    accessLevel: 1,
+    accessLevel: "1",
     applicationCode: "CDA",
     roleName: "adminTwo",
     menuGroup: [{
@@ -154,7 +154,7 @@ describe("db role testing", () => {
       // add a valid role object
       tenantId: "tid",
       entityCode: "Entity",
-      accessLevel: 1,
+      accessLevel: "1",
       applicationCode: "CDA",
       roleName: "adminThree",
       menuGroup: [{
@@ -186,7 +186,7 @@ describe("db role testing", () => {
       // add a valid role object
       tenantId: "tid",
       entityCode: "Entity",
-      accessLevel: 0,
+      accessLevel: "0",
       applicationCode: "CDA",
       roleName: "adminFour",
       menuGroup: [{
@@ -256,7 +256,7 @@ describe("db role testing", () => {
             .to.eql('Entity');
           expect(docs[0])
             .to.have.property('accessLevel')
-            .to.eql(1);
+            .to.eql("1");
           done();
         }, (err) => {
           done(err);
@@ -288,7 +288,7 @@ describe("db role testing", () => {
             .to.eql('Entity');
           expect(docs[0])
             .to.have.property('accessLevel')
-            .to.eql(1);
+            .to.eql("1");
           done();
         }, (err) => {
           done(err);
@@ -343,7 +343,7 @@ describe("db role testing", () => {
       //add a valid role object
       tenantId: "tid",
       entityCode: 'Entity',
-      accessLevel: 1,
+      accessLevel: "1",
       applicationCode: "CDA",
       roleName: "adminOne",
       menuGroup: [{
