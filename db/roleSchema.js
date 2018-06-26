@@ -64,24 +64,27 @@ var roleSchema = new mongoose.Schema({
     required: true
   },
   lastUpdatedDate: {
-    type: Date
+    type: Date,
+    required: true
   },
   enableFlag: {
-    type: Number,
-    default: 1
+    type: String,
+    enum: ["0", "1"]
   },
   deletedFlag: {
-    type: Number,
-    default: 0
+    type: String,
+    enum: ["0", "1"],
+    default: "0"
   },
   activationStatus: {
     type: String,
+    enum: ["ACTIVE", "INACTIVE"],
     required: true
   },
   processingStatus: {
     type: String,
-    enum: ['Pending Authorization', 'Authorized', 'Rejected'],
-    default: 'Pending Authorization',
+    enum: ['PENDING_AUTHORIZATION', 'AUTHORIZED', 'REJECTED'],
+    default: 'PENDING_AUTHORIZATION',
     required: true
   },
   associatedUsers: {

@@ -48,8 +48,8 @@ describe('role model validation', () => {
       }]
     }],
     description: "role",
-    activationStatus: "active",
-    processingStatus: "Pending Authorization",
+    activationStatus: "ACTIVE",
+    processingStatus: "PENDING_AUTHORIZATION",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -81,11 +81,12 @@ describe('role model validation', () => {
       }]
     }],
     description: "role",
-    activationStatus: "active",
-    processingStatus: "Pending Authorization",
+    activationStatus: "ACTIVE",
+    processingStatus: "PENDING_AUTHORIZATION",
     associatedUsers: 5,
     createdBy: "kamalarani",
-    createdDate: new Date().toISOString()
+    createdDate: new Date().toISOString(),
+    lastUpdatedDate: new Date().toISOString()
   };
 
   let undefinedObject; // object that is not defined
@@ -101,88 +102,88 @@ describe('role model validation', () => {
     });
   });
 
-  // describe("validation against jsonschema", () => {
-  //   it("valid role should validate successfully", (done) => {
-  //     try {
-  //       var res = role.validate(roleObject);
-  //       expect(res)
-  //         .to.eventually.equal(true)
-  //         .notify(done);
-  //       // if notify is not done the test will fail
-  //       // with timeout
-  //     } catch (e) {
-  //       expect.fail(e, null, `valid role object should not throw exception: ${e}`);
-  //     }
-  //   });
-  //
-  //   it("invalid role should return errors", (done) => {
-  //     try {
-  //       var res = role.validate(invalidObject);
-  //       expect(res)
-  //         .to.be.rejected
-  //         .notify(done);
-  //     } catch (e) {
-  //       expect.fail(e, null, `exception: ${e}`);
-  //     }
-  //   });
-  //
-  //   if ("should error out for undefined objects", (done) => {
-  //     try {
-  //       var res = role.validate(undefinedObject);
-  //       expect(res)
-  //         .to.be.rejected
-  //         .notify(done);
-  //     } catch (e) {
-  //       expect.fail(e, null, `exception: ${e}`);
-  //     }
-  //   });
-  //
-  //   if ("should error out for null objects", (done) => {
-  //     try {
-  //       var res = role.validate(nullObject);
-  //       expect(res)
-  //         .to.be.rejected
-  //         .notify(done);
-  //     } catch (e) {
-  //       expect.fail(e, null, `exception: ${e}`);
-  //     }
-  //   });
-  //
-  // });
-  //
-  // describe("testing role.save method", () => {
-  //
-  //   beforeEach((done) => {
-  //     db.deleteAll().then((res) => {
-  //       done();
-  //     });
-  //   });
-  //
-  //   it('should save a valid role object to database', (done) => {
-  //     try {
-  //       var result = role.save(roleObject);
-  //       //replace anyAttribute with one of the valid attribute of a role Object
-  //       expect(result)
-  //         .to.eventually.have.property(`roleName`)
-  //         .to.eql(roleObject.roleName)
-  //         .notify(done);
-  //     } catch (e) {
-  //       expect.fail(e, null, `saving role object should not throw exception: ${e}`);
-  //     }
-  //   });
-  //
-  //   it('should not save a invalid role object to database', (done) => {
-  //     try {
-  //       var result = role.save(invalidObject);
-  //       expect(result)
-  //         .to.be.rejected
-  //         .notify(done);
-  //     } catch (e) {
-  //       expect.fail(e, null, `exception: ${e}`);
-  //     }
-  //   });
-  //
-  // });
+  describe("validation against jsonschema", () => {
+    it("valid role should validate successfully", (done) => {
+      try {
+        var res = role.validate(roleObject);
+        expect(res)
+          .to.eventually.equal(true)
+          .notify(done);
+        // if notify is not done the test will fail
+        // with timeout
+      } catch (e) {
+        expect.fail(e, null, `valid role object should not throw exception: ${e}`);
+      }
+    });
+
+    it("invalid role should return errors", (done) => {
+      try {
+        var res = role.validate(invalidObject);
+        expect(res)
+          .to.be.rejected
+          .notify(done);
+      } catch (e) {
+        expect.fail(e, null, `exception: ${e}`);
+      }
+    });
+
+    if ("should error out for undefined objects", (done) => {
+        try {
+          var res = role.validate(undefinedObject);
+          expect(res)
+            .to.be.rejected
+            .notify(done);
+        } catch (e) {
+          expect.fail(e, null, `exception: ${e}`);
+        }
+      });
+
+    if ("should error out for null objects", (done) => {
+        try {
+          var res = role.validate(nullObject);
+          expect(res)
+            .to.be.rejected
+            .notify(done);
+        } catch (e) {
+          expect.fail(e, null, `exception: ${e}`);
+        }
+      });
+
+  });
+
+  describe("testing role.save method", () => {
+
+    beforeEach((done) => {
+      db.deleteAll().then((res) => {
+        done();
+      });
+    });
+
+    it('should save a valid role object to database', (done) => {
+      try {
+        var result = role.save(roleObject);
+        //replace anyAttribute with one of the valid attribute of a role Object
+        expect(result)
+          .to.eventually.have.property(`roleName`)
+          .to.eql(roleObject.roleName)
+          .notify(done);
+      } catch (e) {
+        expect.fail(e, null, `saving role object should not throw exception: ${e}`);
+      }
+    });
+
+    it('should not save a invalid role object to database', (done) => {
+      try {
+        var result = role.save(invalidObject);
+        expect(result)
+          .to.be.rejected
+          .notify(done);
+      } catch (e) {
+        expect.fail(e, null, `exception: ${e}`);
+      }
+    });
+
+  });
 
   describe('testing role.getAll when there is data in database', () => {
     let object1 = {
@@ -210,8 +211,8 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -242,8 +243,8 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -273,8 +274,8 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -495,11 +496,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       },
       object2 = {
         //add one more valid role object here
@@ -526,11 +528,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       };
     beforeEach((done) => {
       db.deleteAll().then((res) => {
@@ -645,11 +648,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       },
       object2 = {
         //add one more valid role object here
@@ -676,11 +680,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       };
     beforeEach((done) => {
       db.deleteAll().then((res) => {
@@ -794,11 +799,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       },
       object2 = {
         //add one more valid role object here
@@ -825,11 +831,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       };
     beforeEach((done) => {
       db.deleteAll()
@@ -933,11 +940,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       },
       object2 = {
         //add one more valid role object here
@@ -964,11 +972,12 @@ describe('role model validation', () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
-        createdDate: new Date().toISOString()
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
       };
 
     beforeEach((done) => {
@@ -985,24 +994,24 @@ describe('role model validation', () => {
         });
     });
 
-    //Query by processing status as Pending Authorization, activationStatus as inactive and applicationCode as CDA
+    //Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
     // It should return array with only one object
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'Pending Authorization',
+        processingStatus: 'PENDING_AUTHORIZATION',
         applicationCode: 'CDA',
-        activationStatus: 'active'
+        activationStatus: 'ACTIVE'
       });
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
         .notify(done);
     });
 
-    //Query by activation status as active
-    //It should return empty array as there are no roles with activation status as inactive
+    //Query by activation status as ACTIVE
+    //It should return empty array as there are no roles with activation status as inACTIVE
     it("should return empty array as there are no roles matching the query parameter ", (done) => {
       var res = role.filterByRoleDetails({
-        activationStatus: 'inactive'
+        activationStatus: 'inACTIVE'
       });
       expect(res).to.eventually.be.a("array")
         .to.have.length(0)

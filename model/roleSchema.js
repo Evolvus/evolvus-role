@@ -121,21 +121,22 @@ module.exports.schema = {
       "format": "date-time"
     },
     "enableFlag": {
-      "type": "number",
-      "default": 1
+      "type": "string",
+      "enum": ["0", "1"]
     },
     "deletedFlag": {
-      "type": "number",
-      "default": 0
+      "type": "string",
+      "enum": ["0", "1"],
+      "default": "0"
     },
     "activationStatus": {
       "type": "string",
-      "enum": ["active", "inactive"]
+      "enum": ["ACTIVE", "INACTIVE"]
     },
     "processingStatus": {
       "type": "string",
-      "enum": ["Pending Authorization", "Authorized", "Rejected"],
-      "default": "Pending Authorization"
+      "enum": ["PENDING_AUTHORIZATION", "AUTHORIZED", "REJECTED"],
+      "default": "PENDING_AUTHORIZATION"
     },
     "associatedUsers": {
       "type": "number"
@@ -147,5 +148,5 @@ module.exports.schema = {
       "type": "string"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "accessLevel", "entityCode"]
+  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "processingStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate", "accessLevel", "entityCode"]
 };

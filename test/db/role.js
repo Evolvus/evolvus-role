@@ -49,7 +49,7 @@ describe("db role testing", () => {
       }]
     }],
     description: "role",
-    activationStatus: "active",
+    activationStatus: "ACTIVE",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -80,8 +80,8 @@ describe("db role testing", () => {
       }]
     }],
     description: "role",
-    activationStatus: "active",
-    processingStatus: "Pending Authorization",
+    activationStatus: "ACTIVE",
+    processingStatus: "PENDING_AUTHORIZATION",
     associatedUsers: 5,
     createdBy: "kamalarani",
     createdDate: new Date().toISOString(),
@@ -134,8 +134,8 @@ describe("db role testing", () => {
           }]
         }],
         description: "role",
-        activationStatus: "active",
-        processingStatus: "Pending Authorization",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
         associatedUsers: 5,
         createdBy: "kamalarani",
         createdDate: new Date().toISOString(),
@@ -175,8 +175,8 @@ describe("db role testing", () => {
         }]
       }],
       description: "role",
-      activationStatus: "active",
-      processingStatus: "Pending Authorization",
+      activationStatus: "ACTIVE",
+      processingStatus: "PENDING_AUTHORIZATION",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -207,8 +207,8 @@ describe("db role testing", () => {
         }]
       }],
       description: "role",
-      activationStatus: "active",
-      processingStatus: "Pending Authorization",
+      activationStatus: "ACTIVE",
+      processingStatus: "PENDING_AUTHORIZATION",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -364,8 +364,8 @@ describe("db role testing", () => {
         }]
       }],
       description: "role",
-      activationStatus: "active",
-      processingStatus: "Pending Authorization",
+      activationStatus: "ACTIVE",
+      processingStatus: "PENDING_AUTHORIZATION",
       associatedUsers: 5,
       createdBy: "kamalarani",
       createdDate: new Date().toISOString(),
@@ -533,13 +533,13 @@ describe("db role testing", () => {
       });
     });
 
-    //Query by processing status as Pending Authorization, activationStatus as active and applicationCode as CDA
+    //Query by processing status as PENDING_AUTHORIZATION, activationStatus as ACTIVE and applicationCode as CDA
     // It should return array of 2 objects
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'Pending Authorization',
+        processingStatus: 'PENDING_AUTHORIZATION',
         applicationCode: 'CDA',
-        activationStatus: 'active'
+        activationStatus: 'ACTIVE'
       });
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
