@@ -92,10 +92,6 @@ module.exports.save = (roleObject) => {
 module.exports.getAll = (tenantId, entityCode, accessLevel,pageSize, pageNo, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
-
-      if (pageSize == null) {
-        pageSize = -1;
-      }
       if (orderBy == null) {
         orderBy = {
           lastUpdatedDate: -1
