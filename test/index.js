@@ -24,7 +24,7 @@ describe('role model validation', () => {
     entityCode: "Entity",
     accessLevel: "0",
     applicationCode: "CDA",
-    roleName: "admin",
+    roleName: "admin_One",
     menuGroup: [{
       tenantId: "tid",
       applicationCode: "CDA",
@@ -47,7 +47,7 @@ describe('role model validation', () => {
         menuItemOrder: 1
       }]
     }],
-    description: "role",
+    description: "admin_One description.",
     activationStatus: "ACTIVE",
     processingStatus: "PENDING_AUTHORIZATION",
     associatedUsers: 5,

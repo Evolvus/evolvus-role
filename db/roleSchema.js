@@ -24,13 +24,13 @@ var roleSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minLength: 1,
-    maxLength: 20,
+    minLength: 6,
+    maxLength: 35,
     validate: {
       validator: function(v) {
-        return /^[A-Za-z ]*$/.test(v);
+        return /^[a-zA-Z-0-9-_ ]+$/.test(v);
       },
-      message: "{PATH} can contain only alphabets and spaces"
+      message: "{PATH} can contain only alphabets and numbers"
     }
   },
   menuGroup: {
@@ -43,13 +43,15 @@ var roleSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minLength: 1,
-    maxLength: 255,
+    minLength: 6,
+    maxLength: 140,
     validate: {
       validator: function(v) {
-        return /^[A-Za-z ]*$/.test(v);
+        return /^[ A-Za-z0-9_@.,;:/&!^*(){}[\]?$%#&=+-]*$/.test(v);
+        //return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]*$/.test(v);
+        //return /^[ A-Za-z0-9_@.,;:/&!^*(){}$%#&+-/[abc+]/] * $ / .test(v);
       },
-      message: "{PATH} can contain only alphabets and spaces"
+      message: "{PATH} can contain only alphabets and numbers and specialcharacters"
     }
   },
   createdBy: {

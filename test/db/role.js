@@ -30,7 +30,7 @@ describe("db role testing", () => {
     entityCode: "Entity",
     accessLevel: "1",
     applicationCode: "CDA",
-    roleName: "admin",
+    roleName: "admin_One",
     menuGroup: [{
       tenantId: "tid",
       applicationCode: "CDA",
@@ -48,7 +48,7 @@ describe("db role testing", () => {
         title: "menuItem title"
       }]
     }],
-    description: "role",
+    description: "admin_One decription *",
     activationStatus: "ACTIVE",
     associatedUsers: 5,
     createdBy: "kamalarani",
@@ -423,11 +423,11 @@ describe("db role testing", () => {
     it("should return object for valid attribute value", (done) => {
       // take one valid attribute and its value
       let attributename = "roleName";
-      let attributeValue = "admin";
+      let attributeValue = "admin_One";
       let res = role.findOne(attributename, attributeValue);
       expect(res)
         .to.eventually.have.property('roleName')
-        .to.eql('admin')
+        .to.eql('admin_One')
         .notify(done);
     });
 

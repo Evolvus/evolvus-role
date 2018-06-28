@@ -18,8 +18,8 @@ module.exports.schema = {
     },
     "roleName": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 20
+      "minLength": 6,
+      "maxLength": 35
     },
     "menuGroup": {
       "type": "array",
@@ -103,8 +103,8 @@ module.exports.schema = {
     },
     "description": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 255
+      "minLength": 6,
+      "maxLength": 140
     },
     "createdBy": {
       "type": "string"
