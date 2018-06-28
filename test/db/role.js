@@ -87,6 +87,70 @@ describe("db role testing", () => {
     createdDate: new Date().toISOString(),
     lastUpdatedDate: new Date().toISOString()
   };
+  let object3 = {
+    // add a valid role object
+    tenantId: "tid",
+    entityCode: "Entity",
+    accessLevel: "1",
+    applicationCode: "CDA",
+    roleName: "adminThree",
+    menuGroup: [{
+      tenantId: "tid",
+      applicationCode: "CDA",
+      menuGroupCode: "mggcc",
+      title: "menugroup title",
+      menuItems: [{
+        menuItemType: "queues",
+        applicationCode: "CDA",
+        menuItemCode: "miicc",
+        title: "menuItem title"
+      }, {
+        menuItemType: "queues",
+        applicationCode: "RTP",
+        menuItemCode: "mmiic",
+        title: "menuItem title"
+      }]
+    }],
+    description: "role",
+    activationStatus: "ACTIVE",
+    processingStatus: "PENDING_AUTHORIZATION",
+    associatedUsers: 5,
+    createdBy: "kamalarani",
+    createdDate: new Date().toISOString(),
+    lastUpdatedDate: new Date().toISOString()
+  };
+  let object4 = {
+    // add a valid role object
+    tenantId: "tid",
+    entityCode: "Entity",
+    accessLevel: "1",
+    applicationCode: "CDA",
+    roleName: "adminFour",
+    menuGroup: [{
+      tenantId: "tid",
+      applicationCode: "CDA",
+      menuGroupCode: "mgccc",
+      title: "menugroup title",
+      menuItems: [{
+        menuItemType: "queues",
+        applicationCode: "CDA",
+        menuItemCode: "micc",
+        title: "menuItem title"
+      }, {
+        menuItemType: "queues",
+        applicationCode: "RTP",
+        menuItemCode: "mmmic",
+        title: "menuItem title"
+      }]
+    }],
+    description: "role",
+    activationStatus: "ACTIVE",
+    processingStatus: "PENDING_AUTHORIZATION",
+    associatedUsers: 5,
+    createdBy: "kamalarani",
+    createdDate: new Date().toISOString(),
+    lastUpdatedDate: new Date().toISOString()
+  };
 
   describe("testing role.save", () => {
     // Testing save
@@ -150,70 +214,7 @@ describe("db role testing", () => {
 
   describe("testing role.findAll by limit", () => {
 
-    let object3 = {
-      // add a valid role object
-      tenantId: "tid",
-      entityCode: "Entity",
-      accessLevel: "1",
-      applicationCode: "CDA",
-      roleName: "adminThree",
-      menuGroup: [{
-        tenantId: "tid",
-        applicationCode: "CDA",
-        menuGroupCode: "mggcc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
-          applicationCode: "CDA",
-          menuItemCode: "miicc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmiic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "ACTIVE",
-      processingStatus: "PENDING_AUTHORIZATION",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString(),
-      lastUpdatedDate: new Date().toISOString()
-    };
-    let object4 = {
-      // add a valid role object
-      tenantId: "tid",
-      entityCode: "Entity",
-      accessLevel: "0",
-      applicationCode: "CDA",
-      roleName: "adminFour",
-      menuGroup: [{
-        tenantId: "tid",
-        applicationCode: "CDA",
-        menuGroupCode: "mgccc",
-        title: "menugroup title",
-        menuItems: [{
-          menuItemType: "queues",
-          applicationCode: "CDA",
-          menuItemCode: "micc",
-          title: "menuItem title"
-        }, {
-          menuItemType: "queues",
-          applicationCode: "RTP",
-          menuItemCode: "mmmic",
-          title: "menuItem title"
-        }]
-      }],
-      description: "role",
-      activationStatus: "ACTIVE",
-      processingStatus: "PENDING_AUTHORIZATION",
-      associatedUsers: 5,
-      createdBy: "kamalarani",
-      createdDate: new Date().toISOString(),
-      lastUpdatedDate: new Date().toISOString()
-    };
+
     // 1. Delete all records in the table and insert
     //    4 new records.
     // find -should return an array of size equal to value of limit with the
@@ -234,46 +235,15 @@ describe("db role testing", () => {
       });
     });
 
-    // There are 3 roles with entity 'Entity',tenandId 'tid' and accessLevel 1 and one role with accessLevel 0
-    // Query the collection with tenantId 'tid', accessLevel 1 and entity 'Entity'
-    // It should return 3 records
-    it("should return 3 records based on filter condition", (done) => {
+    //  There are 3 roles with entity 'Entity',tenandId 'tid' and accessLevel 1 and one role with accessLevel 0
+    //  Query the collection with tenantId 'tid', accessLevel 1 and entity 'Entity'
+    //  It should return 3 records
+    it("should return 2 records based on filter condition", (done) => {
       let orderBy = {
-        roleName: 1
+        lastUpdatedDate:-1
       };
-      let res = role.findAll('tid', 'Entity', 1, -1, orderBy);
-      expect(res)
-        .to.be.fulfilled.then((docs) => {
-          expect(docs)
-            .to.be.a('array');
-          expect(docs.length)
-            .to.equal(3);
-          expect(docs[0])
-            .to.have.property('tenantId')
-            .to.eql('tid');
-          expect(docs[0])
-            .to.have.property('entityCode')
-            .to.eql('Entity');
-          expect(docs[0])
-            .to.have.property('accessLevel')
-            .to.eql("1");
-          done();
-        }, (err) => {
-          done(err);
-        })
-        .catch((e) => {
-          done(e);
-        });
-    });
+      let res = role.findAll('tid', 'Entity', 1, 2, 2,orderBy);
 
-    // There are 3 roles with entity 'Entity',tenandId 'tid' and accessLevel 1 and one role with accessLevel 0
-    // Query the collection with tenantId 'tid', accessLevel 1 , entity 'Entity' and limit 2
-    // It should return 2 records out of three filterd records
-    it("should return limited number records based on filter condition", (done) => {
-      let orderBy = {
-        roleName: 1
-      };
-      let res = role.findAll('tid', 'Entity', 1, 2, orderBy);
       expect(res)
         .to.be.fulfilled.then((docs) => {
           expect(docs)
@@ -297,8 +267,39 @@ describe("db role testing", () => {
           done(e);
         });
     });
-  });
 
+  // There are 4 roles with entity 'Entity',tenandId 'tid' and accessLevel 1
+  // Query the collection with tenantId 'tid', accessLevel 1 , entity 'Entity' and limit 2
+  // It should return 2 records out of three filterd records
+  it("should return limited number records based on filter condition", (done) => {
+    let orderBy = {
+      lastUpdatedDate: -1
+    };
+    let res = role.findAll('tid', 'Entity',1, 3, 1,orderBy);
+    expect(res)
+      .to.be.fulfilled.then((docs) => {
+        expect(docs)
+          .to.be.a('array');
+        expect(docs.length)
+          .to.equal(3);
+        expect(docs[0])
+          .to.have.property('tenantId')
+          .to.eql('tid');
+        expect(docs[0])
+          .to.have.property('entityCode')
+          .to.eql('Entity');
+        expect(docs[0])
+          .to.have.property('accessLevel')
+          .to.eql("1");
+        done();
+      }, (err) => {
+        done(err);
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+});
   describe("testing roleMenuItemMap.find without data", () => {
     // delete all records
     // find should return empty array
@@ -311,9 +312,9 @@ describe("db role testing", () => {
 
     it("should return empty array i.e. []", (done) => {
       let orderBy = {
-        roleName: 1
+        lastUpdatedDate: -1
       };
-      let res = role.findAll('tid', 'Entity', 1, 2, orderBy);
+      let res = role.findAll('tid', 'Entity', 2, 3, orderBy);
       expect(res)
         .to.be.fulfilled.then((docs) => {
           expect(docs)
@@ -557,5 +558,37 @@ describe("db role testing", () => {
         .to.have.length(0)
         .notify(done);
     });
+  });
+
+
+  describe("testing role.roleCounts", () => {
+    //  Delete all records, insert two record
+    //  1. Query by one attribute and it should return all roles having attribute value
+    //2. Query by an arbitrary attribute value and it should return {}
+
+    //delete all records and insert two roles
+    beforeEach((done) => {
+      role.deleteAll().then(() => {
+        role.save(object1).then((res) => {
+          role.save(object2).then((res) => {
+            role.save(object3).then((res) => {
+              role.save(object4).then((res) => {
+                done();
+              });
+            });
+          });
+        });
+      });
+    });
+
+    it("should return array of objects for valid attribute value", (done) => {
+      // take one valid attribute and its value
+      let res = role.roleCounts('tid', 'Entity', 1, -1);
+      expect(res)
+        .to.eventually.deep.equal(4)
+        .notify(done);
+
+    });
+
   });
 });

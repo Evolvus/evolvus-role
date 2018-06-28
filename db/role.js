@@ -42,7 +42,7 @@ module.exports.save = (object) => {
 // Returns a limited set if all the role(s) with a Promise
 // if the collectiom has no records it Returns
 // a promise with a result of  empty object i.e. {}
-module.exports.findAll = (tenantId, entityCode, accessLevel, limit, orderBy) => {
+module.exports.findAll = (tenantId, entityCode, accessLevel,pageSize,pageNo,orderBy) => {
   let query = {
     tenantId: tenantId,
     accessLevel: {
@@ -51,11 +51,15 @@ module.exports.findAll = (tenantId, entityCode, accessLevel, limit, orderBy) => 
     entityCode: entityCode,
     deletedFlag: 0
   };
-
-  if (limit < 1) {
-    return roleCollection.find(query).sort(orderBy);
+var qskip = pageSize * (pageNo - 1);
+var  qlimit = pageSize;
+  if (qlimit < 1){
+    // var list =[];
+    // list.push(roleCollection.find(query).sort(orderBy));
+    // console.log(list.length);
+    return roleCollection.find(query).skip(qskip).limit(qlimit).sort(orderBy);
   } else {
-    return roleCollection.find(query).limit(limit).sort(orderBy);
+    return roleCollection.find(query).skip(qskip).limit(qlimit).sort(orderBy);
   }
 };
 
@@ -194,6 +198,23 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
       reject(e);
     }
   });
+};
+module.exports.roleCounts=(tenantId, entityCode, accessLevel, limit, orderBy)=>{
+
+  let query = {
+    tenantId: tenantId,
+    accessLevel: {
+      $gte: accessLevel
+    },
+    entityCode: entityCode,
+    deletedFlag: 0
+  };
+
+  if (limit < 1) {
+    return roleCollection.count(query).sort(orderBy);
+  } else {
+    return roleCollection.count(query).limit(limit).sort(orderBy);
+  }
 };
 
 // Deletes all the entries of the collection.

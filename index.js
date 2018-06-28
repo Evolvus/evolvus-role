@@ -89,12 +89,12 @@ module.exports.save = (roleObject) => {
 // List all the objects in the database
 // makes sense to return on a limited number
 // (what if there are 1000000 records in the collection)
-module.exports.getAll = (tenantId, entityCode, accessLevel, limit, orderBy) => {
+module.exports.getAll = (tenantId, entityCode, accessLevel,pageSize, pageNo, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
 
-      if (limit == null) {
-        limit = -1;
+      if (pageSize == null) {
+        pageSize = -1;
       }
       if (orderBy == null) {
         orderBy = {
@@ -102,11 +102,11 @@ module.exports.getAll = (tenantId, entityCode, accessLevel, limit, orderBy) => {
         };
       }
       docketObject.name = "role_getAll";
-      docketObject.keyDataAsJSON = `getAll with limit ${limit}`;
+      docketObject.keyDataAsJSON = `getAll with pageSize ${pageSize}`;
       docketObject.details = `role getAll method`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.findAll(tenantId, entityCode, accessLevel, limit, orderBy).then((docs) => {
+      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy).then((docs) => {
         debug(`role(s) stored in the database are ${docs}`);
         resolve(docs);
       }).catch((e) => {
@@ -307,6 +307,41 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
       docketObject.name = "role_ExceptionOnFilterByRoleDetails";
       docketObject.keyDataAsJSON = `Filter the role collection by query ${filterQuery}`;
       docketObject.details = `caught Exception on role_filterByRoleDetails ${e.message}`;
+      docketClient.postToDocket(docketObject);
+      debug(`caught exception ${e}`);
+      reject(e);
+    }
+  });
+};
+
+module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy) => {
+  return new Promise((resolve, reject) => {
+    try {
+
+      if (pageSize == null) {
+        pageSize = -1;
+      }
+      if (orderBy == null) {
+        orderBy = {
+          lastUpdatedDate: -1
+        };
+      }
+      docketObject.name = "role_getAll";
+      docketObject.keyDataAsJSON = `getAll with pageSize ${pageSize}`;
+      docketObject.details = `role getAll method`;
+      docketClient.postToDocket(docketObject);
+
+      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy).then((docs) => {
+        debug(`role(s) stored in the database are ${docs}`);
+        resolve(docs);
+      }).catch((e) => {
+        debug(`failed to find all the role(s) ${e}`);
+        reject(e);
+      });
+    } catch (e) {
+      docketObject.name = "role_ExceptionOngetAll";
+      docketObject.keyDataAsJSON = "roleObject";
+      docketObject.details = `caught Exception on role_getAll ${e.message}`;
       docketClient.postToDocket(docketObject);
       debug(`caught exception ${e}`);
       reject(e);

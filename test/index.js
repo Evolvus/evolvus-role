@@ -190,7 +190,7 @@ describe('role model validation', () => {
         //add one valid role object here
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: "0",
+        accessLevel: "1",
         applicationCode: "CDA",
         roleName: "adminThree",
         menuGroup: [{
@@ -223,7 +223,7 @@ describe('role model validation', () => {
         tenantId: "tid",
         applicationCode: "CDA",
         entityCode: "Entity",
-        accessLevel: "0",
+        accessLevel: "1",
         roleName: "adminTwo",
         menuGroup: [{
           tenantId: "tid",
@@ -253,7 +253,7 @@ describe('role model validation', () => {
       object3 = {
         tenantId: "tid",
         entityCode: "Entity",
-        accessLevel: "0",
+        accessLevel: "1",
         applicationCode: "CDA",
         roleName: "adminOne",
         menuGroup: [{
@@ -293,37 +293,18 @@ describe('role model validation', () => {
       });
     });
 
-    it('should return limited records as specified by the limit parameter', (done) => {
+    it('should return limited records as specified by the pageNo parameter', (done) => {
       try {
         let orderBy = {
-          roleName: 1
+          lastUpdatedDate: -1
         };
-        let res = role.getAll('tid', 'Entity', 0, 2, orderBy);
+        let res = role.getAll('tid', 'Entity', 1, 2,2, orderBy);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
               .to.be.a('array');
             expect(docs.length)
-              .to.equal(2);
-            done();
-          });
-      } catch (e) {
-        expect.fail(e, null, `exception: ${e}`);
-      }
-    });
-
-    it('should return all records if limit is null or undefined', (done) => {
-      try {
-        let orderBy = {
-          roleName: 1
-        };
-        let res = role.getAll('tid', 'Entity', 0, null, orderBy);
-        expect(res)
-          .to.be.fulfilled.then((docs) => {
-            expect(docs)
-              .to.be.a('array');
-            expect(docs.length)
-              .to.equal(3);
+              .to.equal(1);
             done();
           });
       } catch (e) {
@@ -333,13 +314,13 @@ describe('role model validation', () => {
 
     it('should return records sorted by lastUpdatedDate if orderBy is null or undefined', (done) => {
       try {
-        let res = role.getAll('tid', 'Entity', 0, 2, null);
+        let res = role.getAll('tid', 'Entity', 1, 2,2,null);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
               .to.be.a('array');
             expect(docs.length)
-              .to.equal(2);
+              .to.equal(1);
             done();
           });
       } catch (e) {
@@ -347,10 +328,10 @@ describe('role model validation', () => {
       }
     });
 
-    it('should return records sorted by Role name', (done) => {
+    it('should return records sorted by lastUpdatedDate', (done) => {
       try {
         let orderBy = {
-          roleName: -1
+          lastUpdatedDate: -1
         };
         let res = role.getAll('tid', 'Entity', 0, 2, orderBy);
         expect(res)
@@ -361,7 +342,7 @@ describe('role model validation', () => {
               .to.equal(2);
             expect(docs[0])
               .to.have.property('roleName')
-              .to.eql('adminTwo');
+              .to.eql('adminThree');
             done();
           });
       } catch (e) {
@@ -379,9 +360,9 @@ describe('role model validation', () => {
       });
     });
 
-    it('should return empty array when limit is -1', (done) => {
+    it('should return empty array when there  is no data in data base', (done) => {
       try {
-        let res = role.getAll('tid', 'Entity', 0, 2, null);
+        let res = role.getAll('tid', 'Entity', 1, 2,2);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -854,8 +835,7 @@ describe('role model validation', () => {
 
     it('should update a role and have same _id', (done) => {
       var res = role.update(id, {
-        roleName: "adminOne",
-        roleType: "IT"
+        roleName: "adminOne"
       });
       expect(res)
         .to.eventually.be.a("object")
