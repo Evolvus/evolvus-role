@@ -49,8 +49,6 @@ var roleSchema = new mongoose.Schema({
     validate: {
       validator: function(v) {
         return /^[ A-Za-z0-9_@.,;:/&!^*(){}[\]?$%#&=+-]*$/.test(v);
-        //return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]*$/.test(v);
-        //return /^[ A-Za-z0-9_@.,;:/&!^*(){}$%#&+-/[abc+]/] * $ / .test(v);
       },
       message: "{PATH} can contain only alphabets and numbers and specialcharacters"
     }
