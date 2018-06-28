@@ -19,11 +19,25 @@ module.exports.schema = {
     "roleName": {
       "type": "string",
       "minLength": 6,
-      "maxLength": 35
+      "maxLength": 35,
+      validate: {
+        validator: function(v) {
+          return /^[a-zA-Z-0-9-_ ]+$/.test(v);
+        },
+        message: "{PATH} can contain only alphabets and numbers"
+      }
     },
     "menuGroup": {
       "type": "array",
       "minItems": 1,
+      validate: {
+        validator: function(v) {
+          return /^[]{1, }*$/.test(v);
+          //return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]*$/.test(v);
+          //return /^[ A-Za-z0-9_@.,;:/&!^*(){}$%#&+-/[abc+]/] * $ / .test(v);
+        },
+        message: "Menus required"
+      },
       "items": {
         "properties": {
           "tenantId": {
@@ -104,7 +118,15 @@ module.exports.schema = {
     "description": {
       "type": "string",
       "minLength": 6,
-      "maxLength": 140
+      "maxLength": 140,
+      validate: {
+        validator: function(v) {
+          return /^[ A-Za-z0-9_@.,;:/&!^*(){}[\]?$%#&=+-]*$/.test(v);
+          //return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]*$/.test(v);
+          //return /^[ A-Za-z0-9_@.,;:/&!^*(){}$%#&+-/[abc+]/] * $ / .test(v);
+        },
+        message: "{PATH} can contain only alphabets and numbers and specialcharacters"
+      }
     },
     "createdBy": {
       "type": "string"

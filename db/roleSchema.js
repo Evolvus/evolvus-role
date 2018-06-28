@@ -45,6 +45,7 @@ var roleSchema = new mongoose.Schema({
     type: String,
     minLength: 6,
     maxLength: 140,
+    required: true,
     validate: {
       validator: function(v) {
         return /^[ A-Za-z0-9_@.,;:/&!^*(){}[\]?$%#&=+-]*$/.test(v);

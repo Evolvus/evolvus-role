@@ -642,7 +642,7 @@ describe('role model validation', () => {
         entityCode: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
-        roleName: "adminTwo",
+        roleName: "admin-Two",
         menuGroup: [{
           tenantId: "tid",
           applicationCode: "CDA",
