@@ -978,11 +978,11 @@ describe('role model validation', () => {
     // It should return array with only one object
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-          processingStatus: 'PENDING_AUTHORIZATION'
-          // applicationCode: 'CDA',
-          // activationStatus: 'ACTIVE'
+        processingStatus: 'PENDING_AUTHORIZATION'
+        // applicationCode: 'CDA',
+        // activationStatus: 'ACTIVE'
 
-        }, 5, 1);
+      }, 5, 1);
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
         .notify(done);
@@ -1011,6 +1011,110 @@ describe('role model validation', () => {
       let res = role.filterByRoleDetails(undefinedQuery);
       expect(res)
         .to.eventually.to.be.rejectedWith("IllegalArgumentException")
+        .notify(done);
+    });
+
+  });
+
+  describe("testing filterByRoleDetails", () => {
+
+    let object1 = {
+        //add one valid role object here
+        tenantId: "tid",
+        entityCode: "Entity",
+        accessLevel: "0",
+        applicationCode: "CDA",
+        roleName: "adminThree",
+        menuGroup: [{
+          tenantId: "tid",
+          applicationCode: "CDA",
+          menuGroupCode: "mgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "micc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmic",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
+      },
+      object2 = {
+        //add one more valid role object here
+        tenantId: "tid",
+        applicationCode: "CDA",
+        entityCode: "Entity",
+        accessLevel: "0",
+        roleName: "adminTwo",
+        menuGroup: [{
+          tenantId: "tid",
+          applicationCode: "CDA",
+          menuGroupCode: "mrgcc",
+          title: "menugroup title",
+          menuItems: [{
+            menuItemType: "queues",
+            applicationCode: "CDA",
+            menuItemCode: "mircc",
+            title: "menuItem title"
+          }, {
+            menuItemType: "queues",
+            applicationCode: "RTP",
+            menuItemCode: "mmric",
+            title: "menuItem title"
+          }]
+        }],
+        description: "role",
+        activationStatus: "ACTIVE",
+        processingStatus: "PENDING_AUTHORIZATION",
+        associatedUsers: 5,
+        createdBy: "kamalarani",
+        createdDate: new Date().toISOString(),
+        lastUpdatedDate: new Date().toISOString()
+      };
+
+    beforeEach((done) => {
+      db.deleteAll()
+        .then((res) => {
+          db.save(object1)
+            .then((res) => {
+              id = res._id;
+              db.save(object2)
+                .then((res) => {
+                  done();
+                });
+            });
+        });
+    });
+
+    //Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
+    // It should return array with only one object
+    // it("should return  role count based on query ", (done) => {
+    //   var res = role.getRoleCounts({
+    //     processingStatus: 'PENDING_AUTHORIZATION'
+    //   });
+    //   expect(res)
+    //     .to.eventually.deep.equal(2)
+    //     .notify(done);
+    // });
+
+    //Query by activation status as ACTIVE
+    //It should return empty array as there are no roles with activation status as inACTIVE
+    it("should return 0 as there are no roles matching the query parameter ", (done) => {
+      var res = role.getRoleCounts({
+        activationStatus: 'inACTIVE'
+      });
+      expect(res).to.eventually.deep.equal(0)
         .notify(done);
     });
 

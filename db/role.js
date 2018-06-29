@@ -207,7 +207,7 @@ module.exports.roleCounts = (countQuery, orderBy) => {
     try {
       return roleCollection.count(countQuery).then((res) => {
           debug("finding role count successfull: ", res);
-          resolve(res);
+            resolve(res);
         }, (err) => {
           debug(`rejected finding roleCollection.. ${err}`);
           reject(err);

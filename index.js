@@ -337,23 +337,18 @@ module.exports.getRoleCounts = (countQuery, orderBy) => {
           lastUpdatedDate: -1
         };
       }
-      // if(limit==null){
-      //   limit={
-      //     limit: -1
-      //   };
-      // }
       docketObject.name = "role_filterByRoleDetails";
       docketObject.keyDataAsJSON = `Filter the role collection by query ${countQuery}`;
       docketObject.details = `role_filterByRoleDetails initiated`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.roleCounts(queryObject,orderBy).then((filteredData) => {
-        if (filteredData.length > 0) {
+      roleCollection.roleCounts(queryObject,orderBy).then((roleCount) => {
+        if (roleCount > 0) {
           debug(`filtered Data is ${filteredData}`);
-          resolve(filteredData);
+          resolve(roleCount);
         } else {
           debug(`No data available for filter query ${countQuery}`);
-          resolve([]);
+          resolve(0);
         }
       }).catch((e) => {
         debug(`failed to find ${e}`);
