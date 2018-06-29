@@ -337,26 +337,26 @@ module.exports.getRoleCounts = (countQuery, orderBy) => {
           lastUpdatedDate: -1
         };
       }
-      docketObject.name = "role_filterByRoleDetails";
-      docketObject.keyDataAsJSON = `Filter the role collection by query ${countQuery}`;
-      docketObject.details = `role_filterByRoleDetails initiated`;
+      docketObject.name = "role_getRoleCounts";
+      docketObject.keyDataAsJSON = `Get Role Count from role collection by query ${countQuery}`;
+      docketObject.details = `role_getRoleCounts initiated`;
       docketClient.postToDocket(docketObject);
 
       roleCollection.roleCounts(queryObject,orderBy).then((roleCount) => {
         if (roleCount > 0) {
-          debug(`filtered Data is ${filteredData}`);
+          debug(`Role Count Data is ${roleCount}`);
           resolve(roleCount);
         } else {
-          debug(`No data available for filter query ${countQuery}`);
+          debug(`No Role Count data available for filter query ${countQuery}`);
           resolve(0);
         }
       }).catch((e) => {
         debug(`failed to find ${e}`);
       });
     } catch (e) {
-      docketObject.name = "role_ExceptionOnFilterByRoleDetails";
-      docketObject.keyDataAsJSON = `Filter the role collection by query ${countQuery}`;
-      docketObject.details = `caught Exception on role_filterByRoleDetails ${e.message}`;
+      docketObject.name = "role_ExceptionOnGetRoleCounts";
+      docketObject.keyDataAsJSON = `Get Role Count from role collection by query ${countQuery}`;
+      docketObject.details = `caught Exception on role_getRoleCounts ${e.message}`;
       docketClient.postToDocket(docketObject);
       debug(`caught exception ${e}`);
       reject(e);

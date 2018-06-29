@@ -1097,16 +1097,16 @@ describe('role model validation', () => {
         });
     });
 
-    //Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
-    // It should return array with only one object
-    // it("should return  role count based on query ", (done) => {
-    //   var res = role.getRoleCounts({
-    //     processingStatus: 'PENDING_AUTHORIZATION'
-    //   });
-    //   expect(res)
-    //     .to.eventually.deep.equal(2)
-    //     .notify(done);
-    // });
+  //  Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
+    //It should return array with only one object
+    it("should return  role count based on query ", (done) => {
+      var res = role.getRoleCounts({
+        processingStatus: 'PENDING_AUTHORIZATION'
+      });
+      expect(res)
+        .to.eventually.deep.equal(2)
+        .notify(done);
+    });
 
     //Query by activation status as ACTIVE
     //It should return empty array as there are no roles with activation status as inACTIVE
