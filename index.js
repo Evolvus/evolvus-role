@@ -50,6 +50,7 @@ module.exports.validate = (roleObject) => {
 // All validations must be performed before we save the object here
 // Once the db layer is called its is assumed the object is valid.
 module.exports.save = (roleObject) => {
+
   return new Promise((resolve, reject) => {
     try {
       if (typeof roleObject === 'undefined' || roleObject == null) {
@@ -89,9 +90,11 @@ module.exports.save = (roleObject) => {
 // List all the objects in the database
 // makes sense to return on a limited number
 // (what if there are 1000000 records in the collection)
-module.exports.getAll = (tenantId, entityCode, accessLevel,pageSize, pageNo, orderBy) => {
+module.exports.getAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy) => {
+
   return new Promise((resolve, reject) => {
     try {
+
       if (orderBy == null) {
         orderBy = {
           lastUpdatedDate: -1
@@ -102,7 +105,7 @@ module.exports.getAll = (tenantId, entityCode, accessLevel,pageSize, pageNo, ord
       docketObject.details = `role getAll method`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy).then((docs) => {
+      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy).then((docs) => {
         debug(`role(s) stored in the database are ${docs}`);
         resolve(docs);
       }).catch((e) => {
@@ -311,6 +314,7 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
 };
 
 module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, limit, orderBy) => {
+    console.log("inside role");
   return new Promise((resolve, reject) => {
     try {
 
@@ -323,7 +327,7 @@ module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, limit, orderB
         };
       }
       docketObject.name = "role_getAll";
-      docketObject.keyDataAsJSON = `getAll with pageSize ${pageSize}`;
+      docketObject.keyDataAsJSON = `getAll with limit ${limit}`;
       docketObject.details = `role getAll method`;
       docketClient.postToDocket(docketObject);
 
