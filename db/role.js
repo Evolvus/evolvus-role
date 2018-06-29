@@ -184,36 +184,27 @@ module.exports.update = (id, update) => {
 // Returns a promise
 
 module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
-  return new Promise((resolve, reject) => {
     try {
-      roleCollection.find(filterQuery).sort(orderBy).then((docs) => {
-        debug(`Documents filterd by ${filterQuery} are ${docs}`);
-        resolve(docs);
-      }).catch((e) => {
-        debug(`Failed to filter due to ${e}`);
-        reject(e);
-      });
+      var qskip = filterQuery.pageSize * (filterQuery.pageNo - 1);
+      var  qlimit = filterQuery.pageSize;
+        if (qlimit < 1){
+          // var list =[];
+          // list.push(roleCollection.find(query).sort(orderBy));
+          // console.log(list.length);
+          return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
+        } else {
+          return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
+        }
     } catch (e) {
       debug(`Caught Exception ${e}`);
       reject(e);
     }
-  });
-};
-module.exports.roleCounts=(tenantId, entityCode, accessLevel,limit, orderBy)=>{
-
-  let query = {
-    tenantId: tenantId,
-    accessLevel: {
-      $gte: accessLevel
-    },
-    entityCode: entityCode,
-    deletedFlag: 0
   };
-
+module.exports.roleCounts=(filterQuery,limit, orderBy)=>{
   if (limit < 1) {
-    return roleCollection.count(query).sort(orderBy);
+    return roleCollection.count(filterQuery).sort(orderBy);
   } else {
-    return roleCollection.count(query).limit(limit).sort(orderBy);
+    return roleCollection.count(filterQuery).limit(limit).sort(orderBy);
   }
 };
 

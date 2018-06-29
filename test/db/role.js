@@ -48,6 +48,7 @@ describe("db role testing", () => {
         title: "menuItem title"
       }]
     }],
+    processingStatus: "PENDING_AUTHORIZATION",
     description: "admin_One decription *",
     activationStatus: "ACTIVE",
     associatedUsers: 5,
@@ -240,9 +241,9 @@ describe("db role testing", () => {
     //  It should return 3 records
     it("should return 2 records based on filter condition", (done) => {
       let orderBy = {
-        lastUpdatedDate:-1
+        lastUpdatedDate: -1
       };
-      let res = role.findAll('tid', 'Entity', 1, 2, 2,orderBy);
+      let res = role.findAll('tid', 'Entity', 1, 2, 2, orderBy);
 
       expect(res)
         .to.be.fulfilled.then((docs) => {
@@ -268,38 +269,38 @@ describe("db role testing", () => {
         });
     });
 
-  // There are 4 roles with entity 'Entity',tenandId 'tid' and accessLevel 1
-  // Query the collection with tenantId 'tid', accessLevel 1 , entity 'Entity' and limit 2
-  // It should return 2 records out of three filterd records
-  it("should return limited number records based on filter condition", (done) => {
-    let orderBy = {
-      lastUpdatedDate: -1
-    };
-    let res = role.findAll('tid', 'Entity',1, 3, 1,orderBy);
-    expect(res)
-      .to.be.fulfilled.then((docs) => {
-        expect(docs)
-          .to.be.a('array');
-        expect(docs.length)
-          .to.equal(3);
-        expect(docs[0])
-          .to.have.property('tenantId')
-          .to.eql('tid');
-        expect(docs[0])
-          .to.have.property('entityCode')
-          .to.eql('Entity');
-        expect(docs[0])
-          .to.have.property('accessLevel')
-          .to.eql("1");
-        done();
-      }, (err) => {
-        done(err);
-      })
-      .catch((e) => {
-        done(e);
-      });
+    // There are 4 roles with entity 'Entity',tenandId 'tid' and accessLevel 1
+    // Query the collection with tenantId 'tid', accessLevel 1 , entity 'Entity' and limit 2
+    // It should return 2 records out of three filterd records
+    it("should return limited number records based on filter condition", (done) => {
+      let orderBy = {
+        lastUpdatedDate: -1
+      };
+      let res = role.findAll('tid', 'Entity', 1, 3, 1, orderBy);
+      expect(res)
+        .to.be.fulfilled.then((docs) => {
+          expect(docs)
+            .to.be.a('array');
+          expect(docs.length)
+            .to.equal(3);
+          expect(docs[0])
+            .to.have.property('tenantId')
+            .to.eql('tid');
+          expect(docs[0])
+            .to.have.property('entityCode')
+            .to.eql('Entity');
+          expect(docs[0])
+            .to.have.property('accessLevel')
+            .to.eql("1");
+          done();
+        }, (err) => {
+          done(err);
+        })
+        .catch((e) => {
+          done(e);
+        });
+    });
   });
-});
   describe("testing role.find without data", () => {
     // delete all records
     // find should return empty array
@@ -581,9 +582,11 @@ describe("db role testing", () => {
       });
     });
 
-    it("should return array of objects for valid attribute value", (done) => {
+    it("should return Count for valid attribute value", (done) => {
       // take one valid attribute and its value
-      let res = role.roleCounts('tid', 'Entity', 1, -1);
+      let res = role.roleCounts({
+        processingStatus: 'PENDING_AUTHORIZATION'
+      });
       expect(res)
         .to.eventually.deep.equal(4)
         .notify(done);
