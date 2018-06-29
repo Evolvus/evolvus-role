@@ -298,7 +298,7 @@ describe('role model validation', () => {
         let orderBy = {
           lastUpdatedDate: -1
         };
-        let res = role.getAll('tid', 'Entity', 1, 2,2, orderBy);
+        let res = role.getAll('tid', 'Entity', 1, 2, 2, orderBy);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -314,7 +314,7 @@ describe('role model validation', () => {
 
     it('should return records sorted by lastUpdatedDate if orderBy is null or undefined', (done) => {
       try {
-        let res = role.getAll('tid', 'Entity', 1, 2,2,null);
+        let res = role.getAll('tid', 'Entity', 1, 2, 2, null);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -362,7 +362,7 @@ describe('role model validation', () => {
 
     it('should return empty array when there  is no data in data base', (done) => {
       try {
-        let res = role.getAll('tid', 'Entity', 1, 2,2);
+        let res = role.getAll('tid', 'Entity', 1, 2, 2);
         expect(res)
           .to.be.fulfilled.then((docs) => {
             expect(docs)
@@ -978,10 +978,11 @@ describe('role model validation', () => {
     // It should return array with only one object
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'PENDING_AUTHORIZATION',
-        applicationCode: 'CDA',
-        activationStatus: 'ACTIVE'
-      });
+          processingStatus: 'PENDING_AUTHORIZATION'
+          // applicationCode: 'CDA',
+          // activationStatus: 'ACTIVE'
+
+        }, 5, 1);
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
         .notify(done);

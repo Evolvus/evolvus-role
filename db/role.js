@@ -183,10 +183,10 @@ module.exports.update = (id, update) => {
 // Filters role collection by roleDetails
 // Returns a promise
 
-module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
+module.exports.filterByRoleDetails = (filterQuery,pageSize,pageNo, orderBy) => {
     try {
-      var qskip = filterQuery.pageSize * (filterQuery.pageNo - 1);
-      var  qlimit = filterQuery.pageSize;
+      var qskip =pageSize * (pageNo - 1);
+      var  qlimit = pageSize;
         if (qlimit < 1){
           // var list =[];
           // list.push(roleCollection.find(query).sort(orderBy));
@@ -200,12 +200,14 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
       reject(e);
     }
   };
-module.exports.roleCounts=(filterQuery,limit, orderBy)=>{
-  if (limit < 1) {
-    return roleCollection.count(filterQuery).sort(orderBy);
-  } else {
-    return roleCollection.count(filterQuery).limit(limit).sort(orderBy);
-  }
+module.exports.roleCounts=(countQuery, orderBy)=>{
+  // if (limit < 1) {
+
+    return roleCollection.count(countQuery);
+  // } else {
+
+    // return roleCollection.count(countQuery).limit(limit).sort(orderBy);
+  // }
 };
 
 // Deletes all the entries of the collection.

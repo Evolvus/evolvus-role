@@ -263,7 +263,7 @@ module.exports.update = (id, update) => {
   });
 };
 
-module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) => {
+module.exports.filterByRoleDetails = (filterQuery,pageSize,pageNo, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
       let queryObject = {};
@@ -280,8 +280,6 @@ module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) =>
           queryObject.processingStatus = filterQuery.processingStatus;
         }
         queryObject.deletedFlag = 0;
-        queryObject.pageSize=pageSize;
-        queryObject.pageNo=pageNo;
       }
       if (orderBy == null || typeof orderBy === 'undefined') {
         orderBy = {
@@ -293,7 +291,7 @@ module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) =>
       docketObject.details = `role_filterByRoleDetails initiated`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.filterByRoleDetails(queryObject, orderBy).then((filteredData) => {
+      roleCollection.filterByRoleDetails(queryObject,pageSize,pageNo, orderBy).then((filteredData) => {
         if (filteredData.length > 0) {
           debug(`filtered Data is ${filteredData}`);
           resolve(filteredData);
@@ -316,20 +314,20 @@ module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) =>
 };
 
 
-module.exports.roleCounts = (filterQuery,limit, orderBy) => {
+module.exports.getRoleCounts = (countQuery, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
       let queryObject = {};
-      if (filterQuery == null || typeof filterQuery === 'undefined') {
-        throw new Error("IllegalArgumentException: filterQuery is null or undefined");
+      if (countQuery == null || typeof countQuery === 'undefined') {
+        throw new Error("IllegalArgumentException: countQuery is null or undefined");
       } else {
-        if (filterQuery.applicationCode != null && (filterQuery.applicationCode !== 'undefined')) {
+        if (countQuery.applicationCode != null && (countQuery.applicationCode !== 'undefined')) {
           queryObject.applicationCode = filterQuery.applicationCode;
         }
-        if (filterQuery.activationStatus != null && (filterQuery.activationStatus != 'undefined')) {
+        if (countQuery.activationStatus != null && (countQuery.activationStatus != 'undefined')) {
           queryObject.activationStatus = filterQuery.activationStatus;
         }
-        if (filterQuery.processingStatus != null && (filterQuery.processingStatus != 'undefined')) {
+        if (countQuery.processingStatus != null && (countQuery.processingStatus != 'undefined')) {
           queryObject.processingStatus = filterQuery.processingStatus;
         }
         queryObject.deletedFlag = 0;
@@ -339,22 +337,22 @@ module.exports.roleCounts = (filterQuery,limit, orderBy) => {
           lastUpdatedDate: -1
         };
       }
-      if(limit==null){
-        limit={
-          limit: -1
-        };
-      }
+      // if(limit==null){
+      //   limit={
+      //     limit: -1
+      //   };
+      // }
       docketObject.name = "role_filterByRoleDetails";
-      docketObject.keyDataAsJSON = `Filter the role collection by query ${filterQuery}`;
+      docketObject.keyDataAsJSON = `Filter the role collection by query ${countQuery}`;
       docketObject.details = `role_filterByRoleDetails initiated`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.roleCounts(queryObject, limit,orderBy).then((filteredData) => {
+      roleCollection.roleCounts(queryObject,orderBy).then((filteredData) => {
         if (filteredData.length > 0) {
           debug(`filtered Data is ${filteredData}`);
           resolve(filteredData);
         } else {
-          debug(`No data available for filter query ${filterQuery}`);
+          debug(`No data available for filter query ${countQuery}`);
           resolve([]);
         }
       }).catch((e) => {
@@ -362,7 +360,7 @@ module.exports.roleCounts = (filterQuery,limit, orderBy) => {
       });
     } catch (e) {
       docketObject.name = "role_ExceptionOnFilterByRoleDetails";
-      docketObject.keyDataAsJSON = `Filter the role collection by query ${filterQuery}`;
+      docketObject.keyDataAsJSON = `Filter the role collection by query ${countQuery}`;
       docketObject.details = `caught Exception on role_filterByRoleDetails ${e.message}`;
       docketClient.postToDocket(docketObject);
       debug(`caught exception ${e}`);

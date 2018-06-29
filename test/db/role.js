@@ -539,10 +539,12 @@ describe("db role testing", () => {
     // It should return array of 2 objects
     it("should return filterd values based on query ", (done) => {
       var res = role.filterByRoleDetails({
-        processingStatus: 'PENDING_AUTHORIZATION',
-        applicationCode: 'CDA',
-        activationStatus: 'ACTIVE'
-      });
+        processingStatus: 'PENDING_AUTHORIZATION'
+        // applicationCode: 'CDA',
+        // activationStatus: 'ACTIVE',
+
+
+      },5,1);
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
         .notify(done);
