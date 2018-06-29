@@ -199,7 +199,7 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
     }
   });
 };
-module.exports.roleCounts=(tenantId, entityCode, accessLevel, limit, orderBy)=>{
+module.exports.roleCounts=(tenantId, entityCode, accessLevel,limit, orderBy)=>{
 
   let query = {
     tenantId: tenantId,

@@ -310,12 +310,12 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
   });
 };
 
-module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy) => {
+module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, limit, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
 
-      if (pageSize == null) {
-        pageSize = -1;
+      if (limit== null) {
+        limit = -1;
       }
       if (orderBy == null) {
         orderBy = {
@@ -327,7 +327,7 @@ module.exports.getRoleCounts = (tenantId, entityCode, accessLevel, pageSize,page
       docketObject.details = `role getAll method`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize,pageNo, orderBy).then((docs) => {
+      roleCollection.roleCounts(tenantId, entityCode, accessLevel,limit, orderBy).then((docs) => {
         debug(`role(s) stored in the database are ${docs}`);
         resolve(docs);
       }).catch((e) => {
