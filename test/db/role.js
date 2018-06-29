@@ -300,7 +300,7 @@ describe("db role testing", () => {
       });
   });
 });
-  describe("testing roleMenuItemMap.find without data", () => {
+  describe("testing role.find without data", () => {
     // delete all records
     // find should return empty array
     beforeEach((done) => {

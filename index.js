@@ -263,7 +263,7 @@ module.exports.update = (id, update) => {
   });
 };
 
-module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
+module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
       let queryObject = {};
@@ -280,6 +280,8 @@ module.exports.filterByRoleDetails = (filterQuery, orderBy) => {
           queryObject.processingStatus = filterQuery.processingStatus;
         }
         queryObject.deletedFlag = 0;
+        queryObject.pageSize=pageSize;
+        queryObject.pageNo=pageNo;
       }
       if (orderBy == null || typeof orderBy === 'undefined') {
         orderBy = {
