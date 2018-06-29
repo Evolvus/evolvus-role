@@ -42,7 +42,7 @@ module.exports.save = (object) => {
 // Returns a limited set if all the role(s) with a Promise
 // if the collectiom has no records it Returns
 // a promise with a result of  empty object i.e. {}
-module.exports.findAll = (tenantId, entityCode, accessLevel,pageSize,pageNo,orderBy) => {
+module.exports.findAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy) => {
   let query = {
     tenantId: tenantId,
     accessLevel: {
@@ -51,9 +51,9 @@ module.exports.findAll = (tenantId, entityCode, accessLevel,pageSize,pageNo,orde
     entityCode: entityCode,
     deletedFlag: 0
   };
-var qskip = pageSize * (pageNo - 1);
-var  qlimit = pageSize;
-  if (qlimit < 1){
+  var qskip = pageSize * (pageNo - 1);
+  var qlimit = pageSize;
+  if (qlimit < 1) {
     // var list =[];
     // list.push(roleCollection.find(query).sort(orderBy));
     // console.log(list.length);
@@ -183,33 +183,45 @@ module.exports.update = (id, update) => {
 // Filters role collection by roleDetails
 // Returns a promise
 
-module.exports.filterByRoleDetails = (filterQuery,pageSize,pageNo, orderBy) => {
-    try {
-      var qskip =pageSize * (pageNo - 1);
-      var  qlimit = pageSize;
-        if (qlimit < 1){
-          // var list =[];
-          // list.push(roleCollection.find(query).sort(orderBy));
-          // console.log(list.length);
-          return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
-        } else {
-          return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
-        }
-    } catch (e) {
-      debug(`Caught Exception ${e}`);
-      reject(e);
+module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) => {
+  try {
+    var qskip = pageSize * (pageNo - 1);
+    var qlimit = pageSize;
+    if (qlimit < 1) {
+      // var list =[];
+      // list.push(roleCollection.find(query).sort(orderBy));
+      // console.log(list.length);
+      return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
+    } else {
+      return roleCollection.find(filterQuery).skip(qskip).limit(qlimit).sort(orderBy);
     }
-  };
-module.exports.roleCounts=(countQuery, orderBy)=>{
-  // if (limit < 1) {
-
-    return roleCollection.count(countQuery);
-  // } else {
-
-    // return roleCollection.count(countQuery).limit(limit).sort(orderBy);
-  // }
+  } catch (e) {
+    debug(`Caught Exception ${e}`);
+    reject(e);
+  }
 };
 
+
+module.exports.roleCounts = (countQuery, orderBy) => {
+  return new Promise((resolve, reject) => {
+    try {
+      return roleCollection.count(countQuery).then((res) => {
+          debug("finding role count successfull: ", res);
+          resolve(res);
+        }, (err) => {
+          debug(`rejected finding roleCollection.. ${err}`);
+          reject(err);
+        })
+        .catch((e) => {
+          debug(`exception on finding role counts: ${e}`);
+          reject(e);
+        });
+    } catch (e) {
+      debug(`caught exception ${e}`);
+      reject(e.message);
+    }
+  });
+};
 // Deletes all the entries of the collection.
 // To be used by test only
 module.exports.deleteAll = () => {
