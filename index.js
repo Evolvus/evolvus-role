@@ -322,13 +322,13 @@ module.exports.getRoleCounts = (countQuery, orderBy) => {
         throw new Error("IllegalArgumentException: countQuery is null or undefined");
       } else {
         if (countQuery.applicationCode != null && (countQuery.applicationCode !== 'undefined')) {
-          queryObject.applicationCode = filterQuery.applicationCode;
+          queryObject.applicationCode = countQuery.applicationCode;
         }
         if (countQuery.activationStatus != null && (countQuery.activationStatus != 'undefined')) {
-          queryObject.activationStatus = filterQuery.activationStatus;
+          queryObject.activationStatus = countQuery.activationStatus;
         }
         if (countQuery.processingStatus != null && (countQuery.processingStatus != 'undefined')) {
-          queryObject.processingStatus = filterQuery.processingStatus;
+          queryObject.processingStatus = countQuery.processingStatus;
         }
         queryObject.deletedFlag = 0;
       }
