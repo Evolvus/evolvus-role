@@ -202,26 +202,42 @@ module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) =>
 };
 
 
-module.exports.roleCounts = (countQuery, orderBy) => {
-  return new Promise((resolve, reject) => {
-    try {
-      return roleCollection.count(countQuery).then((res) => {
-          debug("finding role count successfull: ", res);
-            resolve(res);
-        }, (err) => {
-          debug(`rejected finding roleCollection.. ${err}`);
-          reject(err);
-        })
-        .catch((e) => {
-          debug(`exception on finding role counts: ${e}`);
-          reject(e);
-        });
-    } catch (e) {
-      debug(`caught exception ${e}`);
-      reject(e.message);
+// module.exports.roleCounts = (countQuery, orderBy) => {
+//   console.log(countQuery,"count ");
+//   return new Promise((resolve, reject) => {
+//     try {
+//        roleCollection.count(countQuery).then((res) => {
+//           debug("finding role count successfull: ", res);
+//           console.log("HereCountIsObtained", res);
+//             resolve(res);
+//         }, (err) => {
+//           debug(`rejected finding roleCollection.. ${err}`);
+//           reject(err);
+//         })
+//         .catch((e) => {
+//           debug(`exception on finding role counts: ${e}`);
+//           reject(e);
+//         });
+//     } catch (e) {
+//       debug(`caught exception ${e}`);
+//       reject(e.message);
+//     }
+//   });
+// };
+module.exports.roleCounts = (countQuery,limit, orderBy) =>{
+
+    if (limit < 1) {
+
+      return roleCollection.count(countQuery).sort(orderBy);
+    } else {
+      return roleCollection.count(countQuery).sort(orderBy);
     }
-  });
+  
 };
+
+
+
+
 // Deletes all the entries of the collection.
 // To be used by test only
 module.exports.deleteAll = () => {

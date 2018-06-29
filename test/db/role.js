@@ -587,9 +587,9 @@ describe("db role testing", () => {
     it("should return Count for valid attribute value", (done) => {
       // take one valid attribute and its value
       let res = role.roleCounts({
-        processingStatus: 'PENDING_AUTHORIZATION'
+        processingStatus: "PENDING_AUTHORIZATION"
       });
-      expect(res)
+         expect(res)
         .to.eventually.deep.equal(4)
         .notify(done);
 
