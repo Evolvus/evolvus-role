@@ -95,7 +95,7 @@ var roleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  entityCode: {
+  entityId: {
     type: String,
     required: true
   }

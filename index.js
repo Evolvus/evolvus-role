@@ -90,7 +90,7 @@ module.exports.save = (roleObject) => {
 // List all the objects in the database
 // makes sense to return on a limited number
 // (what if there are 1000000 records in the collection)
-module.exports.getAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy) => {
+module.exports.getAll = (tenantId, entityId, accessLevel, pageSize, pageNo, orderBy) => {
 
   return new Promise((resolve, reject) => {
     try {
@@ -105,7 +105,7 @@ module.exports.getAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, or
       docketObject.details = `role getAll method`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.findAll(tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy).then((docs) => {
+      roleCollection.findAll(tenantId, entityId, accessLevel, pageSize, pageNo, orderBy).then((docs) => {
         debug(`role(s) stored in the database are ${docs}`);
         resolve(docs);
       }).catch((e) => {
@@ -263,7 +263,7 @@ module.exports.update = (id, update) => {
   });
 };
 
-module.exports.filterByRoleDetails = (filterQuery,pageSize,pageNo, orderBy) => {
+module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) => {
   return new Promise((resolve, reject) => {
     try {
       let queryObject = {};
@@ -291,7 +291,7 @@ module.exports.filterByRoleDetails = (filterQuery,pageSize,pageNo, orderBy) => {
       docketObject.details = `role_filterByRoleDetails initiated`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.filterByRoleDetails(queryObject,pageSize,pageNo, orderBy).then((filteredData) => {
+      roleCollection.filterByRoleDetails(queryObject, pageSize, pageNo, orderBy).then((filteredData) => {
         if (filteredData.length > 0) {
           debug(`filtered Data is ${filteredData}`);
           resolve(filteredData);
@@ -342,7 +342,7 @@ module.exports.getRoleCounts = (countQuery, orderBy) => {
       docketObject.details = `role_getRoleCounts initiated`;
       docketClient.postToDocket(docketObject);
 
-      roleCollection.roleCounts(queryObject,orderBy).then((roleCount) => {
+      roleCollection.roleCounts(queryObject, orderBy).then((roleCount) => {
         if (roleCount > 0) {
           debug(`Role Count Data is ${roleCount}`);
           resolve(roleCount);

@@ -21,7 +21,7 @@ describe('role model validation', () => {
   let roleObject = {
     // add a valid role Object here
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "0",
     applicationCode: "CDA",
     roleName: "admin_One",
@@ -59,7 +59,7 @@ describe('role model validation', () => {
   let invalidObject = {
     //add invalid role Object here
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "0",
     applicationCode: 457,
     roleName: 457,
@@ -189,7 +189,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "1",
         applicationCode: "CDA",
         roleName: "adminThree",
@@ -222,7 +222,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "1",
         roleName: "adminTwo",
         menuGroup: [{
@@ -252,7 +252,7 @@ describe('role model validation', () => {
       },
       object3 = {
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "1",
         applicationCode: "CDA",
         roleName: "adminOne",
@@ -455,7 +455,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
@@ -487,7 +487,7 @@ describe('role model validation', () => {
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminTwo",
@@ -607,7 +607,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
@@ -639,7 +639,7 @@ describe('role model validation', () => {
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "admin-Two",
@@ -758,7 +758,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminOne",
@@ -790,7 +790,7 @@ describe('role model validation', () => {
       object2 = {
         //add one more valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminTwo",
@@ -898,7 +898,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminThree",
@@ -931,7 +931,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         roleName: "adminTwo",
         menuGroup: [{
@@ -1021,7 +1021,7 @@ describe('role model validation', () => {
     let object1 = {
         //add one valid role object here
         tenantId: "tid",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         applicationCode: "CDA",
         roleName: "adminThree",
@@ -1054,7 +1054,7 @@ describe('role model validation', () => {
         //add one more valid role object here
         tenantId: "tid",
         applicationCode: "CDA",
-        entityCode: "Entity",
+        entityId: "Entity",
         accessLevel: "0",
         roleName: "adminTwo",
         menuGroup: [{
@@ -1097,7 +1097,7 @@ describe('role model validation', () => {
         });
     });
 
-  //  Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
+    //  Query by processing status as PENDING_AUTHORIZATION, activationStatus as inACTIVE and applicationCode as CDA
     //It should return array with only one object
     it("should return  role count based on query ", (done) => {
       var res = role.getRoleCounts({

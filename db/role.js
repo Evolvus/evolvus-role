@@ -42,13 +42,15 @@ module.exports.save = (object) => {
 // Returns a limited set if all the role(s) with a Promise
 // if the collectiom has no records it Returns
 // a promise with a result of  empty object i.e. {}
-module.exports.findAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, orderBy) => {
+module.exports.findAll = (tenantId, entityId, accessLevel, pageSize, pageNo, orderBy) => {
   let query = {
     tenantId: tenantId,
     accessLevel: {
       $gte: accessLevel
     },
-    entityCode: entityCode,
+    entityId: {
+      $regex: entityId + ".*"
+    },
     deletedFlag: 0
   };
   var qskip = pageSize * (pageNo - 1);
@@ -57,7 +59,7 @@ module.exports.findAll = (tenantId, entityCode, accessLevel, pageSize, pageNo, o
     // var list =[];
     // list.push(roleCollection.find(query).sort(orderBy));
     // console.log(list.length);
-    return roleCollection.find(query).skip(qskip).limit(qlimit).sort(orderBy);
+    return roleCollection.find(query).skip(qskip).sort(orderBy);
   } else {
     return roleCollection.find(query).skip(qskip).limit(qlimit).sort(orderBy);
   }
@@ -224,15 +226,15 @@ module.exports.filterByRoleDetails = (filterQuery, pageSize, pageNo, orderBy) =>
 //     }
 //   });
 // };
-module.exports.roleCounts = (countQuery,limit, orderBy) =>{
+module.exports.roleCounts = (countQuery, limit, orderBy) => {
 
-    if (limit < 1) {
+  if (limit < 1) {
 
-      return roleCollection.count(countQuery).sort(orderBy);
-    } else {
-      return roleCollection.count(countQuery).sort(orderBy);
-    }
-  
+    return roleCollection.count(countQuery).sort(orderBy);
+  } else {
+    return roleCollection.count(countQuery).sort(orderBy);
+  }
+
 };
 
 

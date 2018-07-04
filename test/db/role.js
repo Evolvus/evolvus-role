@@ -27,7 +27,7 @@ describe("db role testing", () => {
   let object1 = {
     // add a valid role object
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "1",
     applicationCode: "CDA",
     roleName: "admin_One",
@@ -59,7 +59,7 @@ describe("db role testing", () => {
   let object2 = {
     // add a valid role object
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "1",
     applicationCode: "CDA",
     roleName: "adminTwo",
@@ -91,7 +91,7 @@ describe("db role testing", () => {
   let object3 = {
     // add a valid role object
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "1",
     applicationCode: "CDA",
     roleName: "adminThree",
@@ -123,7 +123,7 @@ describe("db role testing", () => {
   let object4 = {
     // add a valid role object
     tenantId: "tid",
-    entityCode: "Entity",
+    entityId: "Entity",
     accessLevel: "1",
     applicationCode: "CDA",
     roleName: "adminFour",
@@ -255,7 +255,7 @@ describe("db role testing", () => {
             .to.have.property('tenantId')
             .to.eql('tid');
           expect(docs[0])
-            .to.have.property('entityCode')
+            .to.have.property('entityId')
             .to.eql('Entity');
           expect(docs[0])
             .to.have.property('accessLevel')
@@ -287,7 +287,7 @@ describe("db role testing", () => {
             .to.have.property('tenantId')
             .to.eql('tid');
           expect(docs[0])
-            .to.have.property('entityCode')
+            .to.have.property('entityId')
             .to.eql('Entity');
           expect(docs[0])
             .to.have.property('accessLevel')
@@ -344,7 +344,7 @@ describe("db role testing", () => {
     let testObject = {
       //add a valid role object
       tenantId: "tid",
-      entityCode: 'Entity',
+      entityId: 'Entity',
       accessLevel: "1",
       applicationCode: "CDA",
       roleName: "adminOne",
@@ -544,7 +544,7 @@ describe("db role testing", () => {
         // activationStatus: 'ACTIVE',
 
 
-      },5,1);
+      }, 5, 1);
       expect(res).to.eventually.be.a("array")
         .to.have.length(2)
         .notify(done);
@@ -589,7 +589,7 @@ describe("db role testing", () => {
       let res = role.roleCounts({
         processingStatus: "PENDING_AUTHORIZATION"
       });
-         expect(res)
+      expect(res)
         .to.eventually.deep.equal(4)
         .notify(done);
 

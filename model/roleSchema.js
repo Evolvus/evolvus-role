@@ -166,9 +166,9 @@ module.exports.schema = {
     "accessLevel": {
       "type": "string"
     },
-    "entityCode": {
+    "entityId": {
       "type": "string"
     }
   },
-  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate", "accessLevel", "entityCode"]
+  "required": ["tenantId", "applicationCode", "roleName", "menuGroup", "activationStatus", "associatedUsers", "createdBy", "createdDate", "lastUpdatedDate", "accessLevel", "entityId"]
 };
